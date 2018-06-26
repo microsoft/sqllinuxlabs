@@ -1,4 +1,8 @@
 
+# SQL Server Linux and Container Labs
+
+Self-paced labs to learn SQL Server on Linux and Docker Containers.
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
