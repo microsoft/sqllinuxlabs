@@ -1,7 +1,9 @@
 
 # SQL Server Linux and Container Labs
 
-Self-paced labs to learn SQL Server on Linux and Docker Containers.
+Self-paced labs to learn SQL Server on Linux and Docker Containers. 
+
+**Note this github repo is marked PUBLIC but the labs are still a work in progress. Stay tuned when we will have all the initial labs ready to be used.**
 
 # Contributing
 
