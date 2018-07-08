@@ -51,8 +51,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Leave Managed Disks to Yes
     - Leave all Network fields to default
     - Leave Network Security Group to Basic
-    - Select SSH (22) for public inbound ports
-    - Note: You are exposing your VM to a public port. To provide less exposure you can configure your VM after it is deployed to only allow specific IP addresses from your client computer to access the VM. Or if you choose to use an Azure VM as a client you do not have to choose this option provided you have setup your Azure VM as a client to access the Linux VM (such as placing the client Azure VM in the same virtual network)
+    - Select SSH (22) and MS SQL (1433) for public inbound ports
+    - Note: You are exposing your VM and SQL Server to a public port. To provide less exposure you can configure your VM after it is deployed to only allow specific IP addresses from your client computer to access the VM or SQL Server. Or if you choose to use an Azure VM as a client you do not have to choose this option provided you have setup your Azure VM as a client to access the Linux VM (such as placing the client Azure VM in the same virtual network)
     - Leave all other fields with default settings
     - Click OK
 
@@ -107,7 +107,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![sqlopstudioversion.png](../Media/sqlopstudioversion.png)
 
-1. Install the lastest SQL Server Management Studio (SSMS) from https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms
+1. Install the lastest SQL Server Management Studio (SSMS) from <https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms>
     - If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
     - Please make sure you are running at minimum version 17.7
     - You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
