@@ -13,13 +13,13 @@ The self-paced labs should be done in the following order:
 
     In this lab you will learn how to deploy SQL Server, explore files from the SQL Installation, explore various common Linux commands and the bash shell, and perform basic tests to connect to SQL Server on Linux.
 
-1. **appcompat**
-
-1. **auto_tune**
+2. **auto_tune**
 
     In this lab you will learn how to observe the Automatic Tuning Feature of SQL Server using SQL Operations Studio. You will learn basics of how to use SQL Operations Studio while understaning how Automatic Tuning can help customers resolve query plan regression problems.
 
-1. **containers**
+3. **containers**
+
+4. **appcompat**
 
 # Contributing
 
