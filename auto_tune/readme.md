@@ -11,34 +11,34 @@ You can watch a demonstration of this lab on YouTube at <https://www.youtube.com
 ## Lab Setup
 
 We will use the WideWorldImporters full sample database for this lab. If you have already restored this in the deploy_and_explore lab you can skip the Lab Setup section. **This lab assumes you have already installed SQL Server for Linux on RHEL (requires Developer or Enterprise Edition) and SQL Server command line tools**.
- 
+
 1. Connect with ssh to your Linux Server and run the following command to copy this database to your Linux Server
 
     `wget https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak`
 
-1. Depending on your network speed this should take no more than a few minutes
+2. Depending on your network speed this should take no more than a few minutes
 
-1. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
+3. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
 
-1. Run the following commands from the bash shell to make the bash shell scripts executable (supply the root password if prompted)
-    
+4. Run the following commands from the bash shell to make the bash shell scripts executable (supply the root password if prompted)
+
     `sudo chmod u+x cpwwi.sh`
 
     `sudo chmod u+x restorewwi.sh`
-    
-1. Copy the backup file to the SQL Server directory so it can access the file and change permissions on the backup file by executing the following command in the bash shell
+
+5. Copy the backup file to the SQL Server directory so it can access the file and change permissions on the backup file by executing the following command in the bash shell
 
     `./cpwwi.sh`
 
-1. Now restore the database by executing the following command from the bash shell
+6. Now restore the database by executing the following command from the bash shell
 
     `./restorewwi.sh`
 
-1. When this command completes successfully the output in your ssh session should look like the following
+7. When this command completes successfully the output in your ssh session should look like the following
 
     ![afterrestorewwi.png](../Media/afterrestorewwi.png)
 
-## Query Plan Regression Recommenations
+## Query Plan Regression Recommendations
 
 Here is the scenario this lab is trying to demonstrate. When you execute a stored procedure in SQL Server, the engine can use a technique called parameter sniffing to compile a query plan based on parameter values of the stored procedure. If the value of the parameter from the procedure is used in a query comparing to a column that has skewed values, the query plan chosen when the query is compiled may not be optimal. 
 
@@ -60,7 +60,7 @@ For this lab, we will create a new stored procedure that will accept an integer 
 
 5. Open up the T-SQL script **batchrequests_perf_collector.sql** and examine it. In order to observe workload performance we need to monitor Batch Requests/Sec. But Windows Performance Monitor does not work with SQL Server on Linux. Therefore this script will collect Batch Requests/Sec from the DMV dm_os_performance_counters in a loop storing them in a global temporary table. This will effectively be our "perfmon" to query and find out workload throughput. Hold off executing this script.
 
-6. Open up the script **batchrequests.sql**. This script will query the global temporary table. When we execut the script, we will be able to use the built-in charting capabilities of SQL Operations Studio to view the workload throughput in a chart (kind of like a static perfmon chart). Notice the results are produced in a format of counter, time, value. Hold off executing this script.
+6. Open up the script **batchrequests.sql**. This script will query the global temporary table. When we execute the script, we will be able to use the built-in charting capabilities of SQL Operations Studio to view the workload throughput in a chart (kind of like a static perfmon chart). Notice the results are produced in a format of counter, time, value. Hold off executing this script.
 
 7. Open up the script **report.sql**. This script is the workload simulator running the report procedure in a loop of batches. Hold off executing this script.
 
@@ -90,7 +90,7 @@ For this lab, we will create a new stored procedure that will accept an integer 
 
     ![initialrecommendations.png](../Media/initialrecommendations.png)
 
-14. Hit Cancel in the windows for batchrequests_perf_collector.sql and report.sql to stop these batches. **Note: We are chasing down an obscure bug with SQL Operations Studio where in some cases these quereis cannot be cancelled after running for a certain period of time. If this occurs, exit and restart SQL Operations Studio to go to the next steps in the lab.**
+14. Hit Cancel in the windows for batchrequests_perf_collector.sql and report.sql to stop these batches. **Note: We are chasing down an obscure bug with SQL Operations Studio where in some cases these queries cannot be cancelled after running for a certain period of time. If this occurs, exit and restart SQL Operations Studio to go to the next steps in the lab.**
 
 You now have observed how with Query Store enabled SQL Server can detect and recommend query plan regression problems. You also have recommendations on how to resolve the problem yourself manually.
 
@@ -108,7 +108,7 @@ In this section of the lab, we will see the same type of query plan regression b
 
     ![batchrequestsautocorrect.png](../Media/batchrequestsautocorrect.png)
 
-4. Run recommendations.sql again and see the results. They should be similar except the state_transition_reason now says LastGoodPlanForced indicating SQL Server has automatically corrected the query plan regressino problem
+4. Run recommendations.sql again and see the results. They should be similar except the state_transition_reason now says LastGoodPlanForced indicating SQL Server has automatically corrected the query plan regression problem
 
     ![autocorrectedrecommendations.png](../Media/autocorrectedrecommendations.png)
 
