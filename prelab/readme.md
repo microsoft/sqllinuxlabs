@@ -18,17 +18,17 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 1. Login into the Azure portal at <http://portal.azure.com>
 
-1. Click on **+ Create a resource**
+2. Click on **+ Create a resource**
 
-1. Type in "Red Hat Enterprise Linux" in the Search Window and hit Enter. Your results should look something like this
+3. Type in "Red Hat Enterprise Linux" in the Search Window and hit Enter. Your results should look something like this
 
     ![RedHatSearchResults.PNG](../Media/RedHatSearchResults.PNG)
 
-1. Select Red Hat Enterprise Linux 7.5 from the list
+4. Select Red Hat Enterprise Linux 7.5 from the list
 
-1. Click on the **Create** button at the bottom of the screen
+5. Click on the **Create** button at the bottom of the screen
 
-1. Fill out the following fields on the Basic blade
+6. Fill out the following fields on the Basic blade
     - Fill in the Name field with a unique hostname
     - Leave VM disk type to SSD
     - Type in a Username
@@ -42,11 +42,11 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![rhelvmbasics.png](../Media/rhelvmbasics.png)
 
-1. Choose a size for your VM
-    - For purposes of these labs, we recommend a minimum of 8 vCPUs and 32GB RAM. I typically choose a DS13_V2 but you are free to pick any other VM with these minimum sizes (like a D8s_V3).
+7. Choose a size for your VM
+    - For purposes of these labs, we recommend a minimum of 4 vCPUs and 16GB RAM. I typically choose a DS13_V2 but you are free to pick any other VM with these minimum sizes (like a D8s_V3).
     - Click on **Select** when you have chosen your size
 
-1. Fill out the following fields on the Settings blade
+8. Fill out the following fields on the Settings blade
     - Leave Availability set to None
     - Leave Managed Disks to Yes
     - Leave all Network fields to default
@@ -58,21 +58,21 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![rhelvmsettings.png](../Media/rhelvmsettings.png)
 
-1. You will be presented with a new blade ready to create the VM. Click the **Create** button at the bottom of the blade
+9. You will be presented with a new blade ready to create the VM. Click the **Create** button at the bottom of the blade
 
-1. Your VM will now be deployed. You can click the Notifications icon at the top of the portal screen to see the deployment in progress. The typical time to create a virtual machine in Azure for Red Hat is about 5-10 minutes.
+10. Your VM will now be deployed. You can click the Notifications icon at the top of the portal screen to see the deployment in progress. The typical time to create a virtual machine in Azure for Red Hat is about 5-10 minutes.
 
     ![AzurePortalNotifications.png](../Media/AzurePortalNotifications.png)
 
-1. On the successful deployment screen, I recommend you select **Pin to Dashboard**
+11. On the successful deployment screen, I recommend you select **Pin to Dashboard**
 
     ![AzureDeploymentSucceeded.PNG](../Media/AzureDeploymentSucceeded.PNG)
 
-1. Now click on **Go to Resource** button and select X in the corner of this Notifications screen to remove it.
+12. Now click on **Go to Resource** button and select X in the corner of this Notifications screen to remove it.
 
     ![VMResourcePage.PNG](../Media/VMResourcePage.PNG)
 
-1. Configure a DNS name to make it easier to connect
+13. Configure a DNS name to make it easier to connect
     - On the resource page, click on **Configure** under **DNS name**
     - Type in a DNS name label. I typically just use the hostname when I created the VM
     - Click the Save button at the top of the screen. This should only take a few seconds
@@ -80,11 +80,11 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
     ![AzureVMDNSname.PNG](../Media/AzureVMDNSname.PNG)
 
-1. Your resources page should now show the DNS name your created
+14. Your resources page should now show the DNS name your created
 
-1. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
+15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
 
-1. Under Login using VM local account click on the **Copy** icon to grab a connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to the next section. I call this the **Linux Login**
+16. Under Login using VM local account click on the **Copy** icon to grab a connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to the next section. I call this the **Linux Login**
 
     ![Copyconnectionsshstring.PNG](../Media/Copyconnectionsshstring.PNG)
 
@@ -99,7 +99,9 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Run the MobaXterm_installer_10.7.msi to launch the installer
     - Accept all the defaults to complete the installation
 
-1. Install SQL Operations Studio from <https://docs.microsoft.com/sql/sql-operations-studio/download>
+    Note: You are free to use any ssh client you like in these labs. My preferred ssh client on Windows is MobaXterm but these labs are not dependent on the use of this tool.
+
+2. Install SQL Operations Studio from <https://docs.microsoft.com/sql/sql-operations-studio/download>
 
     - Choose the Installer Download from Windows.
     - Your browser will download the .exe file which is about 74Mb to your Downloads folder
@@ -107,7 +109,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![sqlopstudioversion.png](../Media/sqlopstudioversion.png)
 
-1. Install the lastest SQL Server Management Studio (SSMS) from <https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms>
+3. Install the latest SQL Server Management Studio (SSMS) from <https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms>
     - If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
     - Please make sure you are running at minimum version 17.7
     - You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
@@ -121,15 +123,15 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 You will need the **Linux Login** and the password you saved from the Azure VM Deployment section above in the prelab.
 
 1. Launch the MobaXterm program
-1. Click on the Session icon in the upper left hand portion of the application
-1. Choose the SSH icon on the far left hand side of the new screen that appears
-1. Put in the Remote Host field the **Linux Login** and click OK. The following screenshot shows an example
+2. Click on the Session icon in the upper left hand portion of the application
+3. Choose the SSH icon on the far left hand side of the new screen that appears
+4. Put in the Remote Host field the **Linux Login** and click OK. The following screenshot shows an example
 
     ![mobaxtermconnect.png](../Media/mobaxtermconnect.png)
 
-1. When prompted type in the password you used when deploying the Azure VM
-1. You may get prompted to save the password. I recommend you click Yes
-1. When you have connected successfully, your screen should look like the following
+5. When prompted type in the password you used when deploying the Azure VM
+6. You may get prompted to save the password. I recommend you click Yes
+7. When you have connected successfully, your screen should look like the following
 
     ![myfirstssh.png](../Media/myfirstssh.png)
 
