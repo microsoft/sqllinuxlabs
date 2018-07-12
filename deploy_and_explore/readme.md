@@ -40,6 +40,12 @@ Run all of the following commands from your ssh session with the bash shell. Thi
 
     ![mssqlconfsuccess.PNG](../Media/mssqlconfsuccess.PNG)
 
+4. Open up the firewall on Linux for the SQL Server port by running the following two commands
+
+    `sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent`
+
+    `sudo firewall-cmd --reload`
+
 Believe it or not, that's it! You have now installed SQL Server on Linux which includes the core database engine and SQL Server Agent.
 
 ## Explore the SQL Server installation
@@ -166,7 +172,9 @@ Let's learn a few common Linux commands while interacting with the bash shell
 9. **htop** is an interactive program to see process utilization information across processors and processes. However, it is not installed by default so run the following commands first to install htop.
 
     `sudo wget dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm`
+
     `sudo rpm -ihv epel-release-7-11.noarch.rpm`
+
     `sudo yum install -y htop`
 
     Now run the interactive htop command to observe its display
@@ -189,7 +197,7 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
     nano is a full screen editor. Type in the following in the editor window
 
-    sudo cat /var/opt/mssql/log/error
+    `sudo cat /var/opt/mssql/log/errorlog`
 
     Type Ctrl+X to exit. You will get prompted to save the file
 
@@ -225,9 +233,11 @@ Let's install the SQL command line tools including sqlcmd (Note: you can also in
 
     `sudo yum install mssql-tools unixODBC-devel`
 
-5. Make sqlcmd accessible in your PATH by executing the following command
+5. Make sqlcmd accessible in your PATH by executing the following commands
 
     `echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile`
+
+    `source ~/.bash_profile`
 
 6. Run a quick test to connect with sqlcmd by executing the following
 
