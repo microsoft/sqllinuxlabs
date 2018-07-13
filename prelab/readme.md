@@ -92,7 +92,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 ### Windows Client
 
-**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to use any ssh client you like. However, if you already have a preferred ssh client installed, be sure you update to the latest version.**
+**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to use any ssh client you like. However, if you already have a preferred ssh client installed, be sure you update to the latest version. One option that may be interesting is the Azure Cloud Shell at <https://shell.azure.com>**
 
 1. Install the MobaXterm client application from <https://mobaxterm.mobatek.net/download-home-edition.html>
 
@@ -168,7 +168,6 @@ sudo systemctl start docker
 ```
 >Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
  
-
 You are now ready to go through the first self-paced lab called **deploy_and_explore**.
 
 You will run the rest of the instructions on using Docker containers for SQL Server in the **containers** lab.

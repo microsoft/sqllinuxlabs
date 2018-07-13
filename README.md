@@ -15,11 +15,11 @@ The self-paced labs should be done in the following order:
 
 2. **auto_tune**
 
-    In this lab you will learn how to observe the Automatic Tuning Feature of SQL Server using SQL Operations Studio. You will learn basics of how to use SQL Operations Studio while understaning how Automatic Tuning can help customers resolve query plan regression problems.
+    In this lab you will learn how to observe the Automatic Tuning Feature of SQL Server using SQL Operations Studio. You will learn basics of how to use SQL Operations Studio while understanding how Automatic Tuning can help customers resolve query plan regression problems.
 
-3. **containers**
+3. **containers and appcompat**
 
-4. **appcompat**
+    In this lab you will learn the basics of SQL Server with docker containers. Then you will apply these skills to deploy an ASP.Net application using containers. This application uses SQL Server engine features that apply across both SQL Server on Windows and Linux.
 
 # Contributing
 
