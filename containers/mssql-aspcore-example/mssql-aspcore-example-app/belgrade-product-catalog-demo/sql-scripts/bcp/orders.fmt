@@ -1,0 +1,7 @@
+13.0
+5
+1       SQLINT              0       4       ""   1     OrderID                      ""
+2       SQLDATE             1       3       ""   2     OrderDate                    ""
+3       SQLCHAR             2       10      ""   3     Status                       Latin1_General_100_CI_AS
+4       SQLDATE             1       3       ""   4     DeliveryDate                 ""
+5       SQLNCHAR            8       0       ""   5     Data                         Latin1_General_100_CI_AS

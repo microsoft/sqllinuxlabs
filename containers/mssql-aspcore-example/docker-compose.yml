@@ -1,0 +1,15 @@
+version: "3"
+services:
+    web:
+        build: ./mssql-aspcore-example-app
+        ports:
+            - "5000:5000"
+        depends_on:
+            - db
+    db:
+        build: ./mssql-aspcore-example-db
+        environment:
+            SA_PASSWORD: "1234qwerASDF"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1500:1433"

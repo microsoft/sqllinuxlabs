@@ -1,0 +1,8 @@
+13.0
+6
+1       SQLINT              0       4       ""   1     OrderLineID                ""
+2       SQLINT              0       4       ""   2     OrderID                    ""
+3       SQLINT              1       4       ""   3     ProductID                  ""
+4       SQLINT              0       4       ""   4     Quantity                   ""
+5       SQLDECIMAL          1       19      ""   5     UnitPrice                  ""
+6       SQLDECIMAL          1       19      ""   6     TaxRate                    ""
