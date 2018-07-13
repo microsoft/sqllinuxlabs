@@ -1,0 +1,18 @@
+ALTER TABLE  Company
+ALTER COLUMN Email ADD MASKED WITH (FUNCTION = 'email()')
+
+ALTER TABLE  Company
+ALTER COLUMN Phone ADD MASKED WITH (FUNCTION = 'partial(5,"XXXXXXX",2)')
+
+ALTER TABLE  Company
+ALTER COLUMN Postcode ADD MASKED WITH (FUNCTION = 'default()')
+
+
+/* TRY IT:
+
+EXECUTE AS USER = 'WebUser';
+SELECT * FROM Company;
+REVERT;
+
+*/
+

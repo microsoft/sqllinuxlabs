@@ -1,0 +1,1 @@
+bcp "select OrderLineID, OrderID, 15 + StockItemId%%14 as ProductID,	Quantity, UnitPrice, TaxRate from Sales.OrderLines" queryout .\orderlines.bcp -S "." -d WideWorldImporters -T
