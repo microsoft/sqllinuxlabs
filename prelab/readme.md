@@ -92,14 +92,14 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 ### Windows Client
 
+**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to use any ssh client you like. However, if you already have a preferred ssh client installed, be sure you update to the latest version.**
+
 1. Install the MobaXterm client application from <https://mobaxterm.mobatek.net/download-home-edition.html>
 
     - Choose the Installer Edition which in your browser will download a file called MobaXterm_Installer_v10.7.zip to your Downloads folder
     - Extract all the files from the zip file
     - Run the MobaXterm_installer_10.7.msi to launch the installer
     - Accept all the defaults to complete the installation
-
-    Note: You are free to use any ssh client you like in these labs. My preferred ssh client on Windows is MobaXterm but these labs are not dependent on the use of this tool.
 
 2. Install SQL Operations Studio from <https://docs.microsoft.com/sql/sql-operations-studio/download>
 
@@ -119,6 +119,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 ## Connecting to your Linux VM with ssh
 
 ### Windows Client
+
+`Note`: If you have any issues connecting with ssh to your Azure VM, be sure to have installed the latest version of your ssh client such as MobaXterm (<https://mobaxterm.mobatek.net/download.html>), Bitvise (<https://www.bitvise.com>), or whatever ssh client you are using on Windows.
 
 You will need the **Linux Login** and the password you saved from the Azure VM Deployment section above in the prelab.
 
