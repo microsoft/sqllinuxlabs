@@ -1,0 +1,1 @@
+docker build ./mssql-aspcore-example-db/ -t "tigervin/mssql-aspcore-example-db"
