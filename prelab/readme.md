@@ -139,7 +139,9 @@ You will need the **Linux Login** and the password you saved from the Azure VM D
 
 ## Installing Updates and Docker for Linux
 
-Note: for this lab we are using the existing docker package in the RHEL yum repository. For customers using Docker with RHEL they should follow all the instructions at <https://docs.docker.com/install/linux/docker-ee/rhel/>
+Note: Remove any previous installations of Docker from your RHEL image by executing the following command
+
+`sudo yum remove docker docker-common docker-selinux docker-engine`
 
 1. From your ssh prompt, update all existing packages and application by running this command (enter the password you used to connect with ssh when prompted). This could take several minutes to update.
 
