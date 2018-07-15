@@ -304,7 +304,7 @@ Now you will learn the great compatibility story of SQL Server on Linux by resto
 
     Depending on your network speed this should take no more than a few minutes
 
-2. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
+2. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files from the downloaded zip of the gitHub repo into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
 
     BONUS: Examine these files from the GitHub repo site and use the nano editor to create them on your Linux Server vs copying them.
 
