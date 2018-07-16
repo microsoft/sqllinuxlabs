@@ -2,7 +2,7 @@
 
 **STOP: This lab requires you have already followed the instructions in the prelab**
 
-This lab will walk you through the basics of deploying SQL Server and command line tools on Linux using Red Hat Enterprise Linux (RHEL). Then you will go through a few exercises to get more familiar with Linux, connect to SQL Serer on Linux with tools, and learn to use the mssql-conf script.
+This lab will walk you through the basics of deploying SQL Server and command line tools on Linux using Red Hat Enterprise Linux (RHEL). Then you will go through a few exercises to get more familiar with Linux, connect to SQL Server on Linux with tools, and learn to use the mssql-conf script.
 
 You should have already completed the prelab to setup RHEL in an Azure Virtual Machine and installed an ssh client, SQL Operations Studio, and SQL Server Management Studio (Windows clients only).
 
@@ -58,7 +58,7 @@ Now that you have completed the basic deployment, let's explore what has been in
 
     ![sqlsvcrunning.PNG](../Media/sqlsvcrunning.PNG)
 
-    SQL Server is installed as a systemd unit which is like a service on Windows. systemctl is used to report on the status and control the service.
+    SQL Server is installed as a systemd unit which is like a service on Windows. **systemctl** is used to report on the status and control the service.
 
     Note in this output two PID values under Cgroup: in this output. We launch two processes for sqlservr on Linux. The top one is the parent which forks the child. The child process is the main SQL Server engine.
 
@@ -78,7 +78,7 @@ Now that you have completed the basic deployment, let's explore what has been in
 
     `sudo systemctl status mssql-server`
 
-    Note that there is no return values when starting, stopping, or restarting. You must run systemctl status to check on the status of SQL Server. With each start of SQL Server, you should see different PID values (for new processes)
+    Note that there are no return values when starting, stopping, or restarting. You must run systemctl status to check on the status of SQL Server. With each start of SQL Server, you should see different PID values (for new processes).
 
 3. Let's see where everything is installed. Run the following command to see where the binaries are installed
 
@@ -150,10 +150,10 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
     ![runningtop.PNG](../Media/runningtop.PNG)
 
-    The **KiB Mem** values show physical total, free, and uses memory
-    The **RES** column is the amount of physical memory used by a process like sqlservr
+    The **KiB Mem** values show physical total, free, and used memory.  
+    The **RES** column is the amount of physical memory used by a process like sqlservr.  
 
-    top is interactive so type in "q" to quit the program
+    **top** is interactive so type in "q" to quit the program 
 
 8. **iotop** is a utility to monitor I/O statistics per process. However, it is not installed by default. Run the following command to first install iotop
 
@@ -163,7 +163,7 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
     `sudo iotop`
 
-    This shows the overall I/O on the system plus I/O per process. Type in "q" to exit the program. Run this version of the command to only view I/O for process actually using I/O. This program is interactive and refreshes itself every few seconds
+    This shows the overall I/O on the system plus I/O per process. Type in "q" to exit the program. Run this version of the command to only view I/O for processes actually using I/O. This program is interactive and refreshes itself every few seconds
 
     `sudo iotop -o`
 
@@ -211,7 +211,7 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
 ## Install SQL Server command line tools on Linux
 
-SQL Server on Linux supports both natively compiled command line tools like **sqlcmd** and open source, cross-platform command line tools such as **mssql-cli**. In this section you will go through the process of installing these tools and performing a quick test they can work. Run all of the following commands from your ssh session with the bash shell. This lab assumes your Linux Server is connected to the internet, but there are pointers in each section for an offline install.
+SQL Server on Linux supports both natively compiled command line tools like **sqlcmd** and open source, cross-platform command line tools such as **mssql-cli**. In this section you will go through the process of installing these tools and performing a quick test to confirm they work. Run all of the following commands from your ssh session with the bash shell. This lab assumes your Linux Server is connected to the internet, but there are pointers in each section for an offline install.
 
 ### Install sqlcmd on Linux
 
@@ -353,17 +353,17 @@ Now you will learn the great compatibility story of SQL Server on Linux by resto
 
     `USE WideWorldImporters;SELECT * FROM Sales.Customers;`
 
-    See how mssql-cli by default will present rows in a vertical record format. Hit Enter to keep paging as many rows as you like. Your results should look like the following
+    See how mssql-cli by default will present rows in a vertical record format. Hit Enter or Space to keep paging as many rows as you like. Your results should look like the following
 
     ![mssqlcliresults.PNG](../Media/mssqlcliresults.PNG)
 
-    Type in "q" at any time to get back to the prompt and "exit" to quite mssql-cli
+    Type in "q" at any time to get back to the prompt and "exit" to quit mssql-cli
 
 ## Use mssql-conf to set a traceflag
 
 There may be situations where you need to enable a traceflag as global and at SQL Server startup time. For Windows, this is done through the SQL Server Configuration Manager. For SQL Server on Linux, you will use the mssql-conf script. A list of all documented traceflags can be found at <https://docs.microsoft.com/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql>.
 
-Let''s say you wanted to enable trace flag 1222 for deadlock details to be reported in the ERRORLOG.
+Let's say you wanted to enable trace flag 1222 for deadlock details to be reported in the ERRORLOG.
 
 1. Run the following command from an ssh session with the bash shell
 
