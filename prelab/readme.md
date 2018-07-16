@@ -28,12 +28,12 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 5. Click on the **Create** button at the bottom of the screen
 
-6. Fill out the following fields on the Basic blade
+6. Fill out the following fields on the Basics blade
     - Fill in the Name field with a unique hostname
-    - Leave VM disk type to SSD
+    - Leave VM disk type set to SSD
     - Type in a Username
     - Choose Authentication Type of Password
-    - Type in and Confirm a password that meets requirements. **IMPORTANT: This password will be used to login to the Linux VM. It is all the root password which you will use with the sudo command in the labs. So secure and save this password.**
+    - Type in and Confirm a password that meets requirements. **IMPORTANT: This password will be used to login to the Linux VM. It is the root password which you will use with the sudo command in the labs. So secure and save this password.**
     - Leave AAD Disabled
     - Choose your Subscription
     - Type in a new Resource Group name or select an existing one you have already created
@@ -47,10 +47,10 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Click on **Select** when you have chosen your size
 
 8. Fill out the following fields on the Settings blade
-    - Leave Availability set to None
-    - Leave Managed Disks to Yes
-    - Leave all Network fields to default
-    - Leave Network Security Group to Basic
+    - Leave Availability zone set to None
+    - Leave Managed Disks set to Yes
+    - Leave all Network fields set to default
+    - Leave Network Security Group set to Basic
     - Select SSH (22) and MS SQL (1433) for public inbound ports
     - Note: You are exposing your VM and SQL Server to a public port. To provide less exposure you can configure your VM after it is deployed to only allow specific IP addresses from your client computer to access the VM or SQL Server. Or if you choose to use an Azure VM as a client you do not have to choose this option provided you have setup your Azure VM as a client to access the Linux VM (such as placing the client Azure VM in the same virtual network)
     - Leave all other fields with default settings
@@ -80,11 +80,11 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
     ![AzureVMDNSname.PNG](../Media/AzureVMDNSname.PNG)
 
-14. Your resources page should now show the DNS name your created
+14. Your resources page should now show the DNS name you created
 
 15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
 
-16. Under Login using VM local account click on the **Copy** icon to grab a connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to the next section. I call this the **Linux Login**
+16. Under Login using VM local account click on the **Copy** icon to grab the connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to use in the next section. I call this the **Linux Login**
 
     ![Copyconnectionsshstring.PNG](../Media/Copyconnectionsshstring.PNG)
 
@@ -143,7 +143,7 @@ Note: Remove any previous installations of Docker from your RHEL image by execut
 
 `sudo yum remove docker docker-common docker-selinux docker-engine`
 
-1. From your ssh prompt, update all existing packages and application by running this command (enter the password you used to connect with ssh when prompted). This could take several minutes to update.
+1. From your ssh prompt, update all existing packages and applications by running this command (enter the password you used to connect with ssh when prompted). This could take several minutes to update.
 
     `sudo yum -y update`
 
@@ -154,7 +154,7 @@ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
+sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
 
 sudo yum install docker-ce
  ```
