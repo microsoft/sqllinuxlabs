@@ -8,7 +8,7 @@ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
+sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
 
 sudo yum install docker-ce
  ```
@@ -27,7 +27,8 @@ sudo systemctl start docker
 2. clone this repo by running the following: 
 
 ```
-git clone https://github.com/vin-yu/ReadyDemo.git 
+sudo yum install git
+git clone https://github.com/Microsoft/sqllinuxlabs.git
 ```
 ---
 
