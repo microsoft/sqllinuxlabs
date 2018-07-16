@@ -288,7 +288,7 @@ You will perform the same tasks to install the new open source, cross-platform t
 
     ![mssqlclisqlver.PNG](../Media/mssqlclisqlver.PNG)
 
-    Type "q" to get back to the prompt.
+    If you are not put back into the mssql-cli prompt, type "q" to get back to the prompt.
 
     mssql-cli does not recognize the "GO" keyword as sqlcmd does. Use a ";" to separate batches. You can also hit F3 to type statements in multiple lines but they will all be in one batch.
 
