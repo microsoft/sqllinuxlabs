@@ -247,6 +247,8 @@ Most applications involve multiple containers.
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
+
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
 
@@ -270,12 +272,15 @@ nano docker-compose.yml
 ![DockerCompose.PNG](/Media/Container-DockerCompose.png)
 
 4. Edit the `-P` parameter in the `./mssql-aspcore-example-db/db-init.sh` file with the `SA_PASSWORD` that you used in the previous step 
+```
+nano ./mssql-aspcore-example-db/db-init.sh
+```
 
 ![db-sh.PNG](/Media/Container-db-sh.png)
 
 4. Run the containers with docker-compose:
 ```
-docker-compose up
+sudo docker-compose up
 ```
 >note: this will take approx. 15 seconds
 
@@ -285,7 +290,7 @@ docker-compose up
 ```
 http:<host IP>:5000
 ```
->Note: If you are running this in an Azure VM, the host IP is the Azure VM IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
+>Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
 
 ![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
 
@@ -293,7 +298,7 @@ To stop the docker compose application, press `ctrl + c` in the terminal.
 To remove the containers run the following command:
 
 ```
-docker-compose down
+sudo docker-compose down
 ```
 
 
