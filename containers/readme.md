@@ -33,10 +33,10 @@ git clone https://github.com/Microsoft/sqllinuxlabs.git
 ---
 
 ## Lab
-### 1. Getting started with SQL Server in Container
+### 1. Getting started with SQL Server in Containers
 
 #### Introduction
-In this section you will run SQL Server in a container and connect to it with SSMS/Operational Studio. This is the easiest way to get started with SQL Server in containers.  
+In this section you will run SQL Server in a container and connect to it with SSMS/SQL Operations Studio. This is the easiest way to get started with SQL Server in containers.  
  
 #### Steps
 1. Change the `SA_PASSWORD` in the command below and run it in your terminal:
@@ -171,14 +171,14 @@ cat Dockerfile
 ```
 ![dockerfile.PNG](/Media/Container-Dockerfile.png)
 
-4. Run the following to build your
+4. Run the following to build your container
 ```
 sudo docker build . -t mssql-with-backup-example
 ```
 ![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
 
 
-5. Start the container with an your `SA_PASSWORD`
+5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
 ```
 sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql2 \
@@ -189,7 +189,7 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
 
 ```
    sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd -S localhost \
-   -U SA -P '1234qwerASDF' \
+   -U SA -P 'YourStrong!Passw0rd' \
    -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/data/SampleDB.bak"' \
    -W \
    | tr -s ' ' | cut -d ' ' -f 1-2
@@ -216,7 +216,7 @@ the output of this command should be similar to
 >
 >RESTORE DATABASE successfully processed 392 pages in 0.278 seconds (11.016 MB/sec).
 
-If you connect to the instance, you should see that the instance was restored.
+If you connect to the instance, you should see that the database was restored.
  
 ![RestoredDB.PNG](/Media/Container-RestoredDB.png)
 
