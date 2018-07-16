@@ -9,7 +9,7 @@ services:
     db:
         build: ./mssql-aspcore-example-db
         environment:
-            SA_PASSWORD: "1234qwerASDF"
+            SA_PASSWORD: "PASSWORD"
             ACCEPT_EULA: "Y"
         ports:
             - "1500:1433"

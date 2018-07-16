@@ -39,14 +39,17 @@ git clone https://github.com/Microsoft/sqllinuxlabs.git
 In this section you will run SQL Server in a container and connect to it with SSMS/Operational Studio. This is the easiest way to get started with SQL Server in containers.  
  
 #### Steps
-1. Change the password in the command below and run it in your terminal:
+1. Change the `SA_PASSWORD` in the command below and run it in your terminal:
 ``` 
 sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql1 \
       -d microsoft/mssql-server-linux:2017-latest
  ```
 
+> Tip: edit commands in a text editor prior to pasting in the terminal to easily edit the commands.
+>
 > Note: By default, the password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols.
+
  
 2. Check that SQL Server is running:
 ```
@@ -62,7 +65,7 @@ Open SSMS or Ops studio and connect to the SQL Server in container instance by c
 ```
 <host IP>, 1500
 ```
->Note: If you are running this in an Azure VM, the host IP is the Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
+>Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
 
 ![GettingStartedOpsStudio.PNG](/Media/Container-GettingStartedOpsStudio.png)
 
@@ -146,10 +149,11 @@ Scenario: Let's say for testing purposes you want to start the container with th
  
 #### Steps:
 
-1. Ensure you are at the base of this project
+1. Change directory to the `mssql-custom-image-example folder`.
 ```
-cd <path to git folder>/mssql-custom-image-example
+cd sqllinuxlabs/containers/mssql-custom-image-example/
 ```
+
 
 2. Create a Dockerfile with the following contents
 ```
@@ -173,17 +177,13 @@ sudo docker build . -t mssql-with-backup-example
 ```
 ![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
 
-5. Start the container 
+
+5. Start the container with an your `SA_PASSWORD`
 ```
 sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql2 \
       -d mssql-with-backup-example
 ```
-the output of this command should be similar to this:
->LogicalName PhysicalName
->----------- ------------
->ProductCatalog /var/opt/mssql/data/ProductCatalog.mdf
->ProductCatalog_log /var/opt/mssql/data/ProductCatalog_log.ldf
 
 6. View the contents of the backup file built in the image:
 
@@ -194,6 +194,20 @@ the output of this command should be similar to this:
    -W \
    | tr -s ' ' | cut -d ' ' -f 1-2
 ```
+
+the output of this command should be similar to this:
+>LogicalName PhysicalName
+>----------- ------------
+>ProductCatalog /var/opt/mssql/data/ProductCatalog.mdf
+>ProductCatalog_log /var/opt/mssql/data/ProductCatalog_log.ldf
+
+7. Restore the backup. Edit the `-P` with `SA_PASSWORD` used in the previous command to start the container:
+```
+sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
+   -S localhost -U SA -P YourStrong!Passw0rd \
+   -Q 'RESTORE DATABASE ProductCatalog FROM DISK = "/var/opt/mssql/data/SampleDB.bak" WITH MOVE "ProductCatalog" TO "/var/opt/mssql/data/ProductCatalog.mdf", MOVE "ProductCatalog_log" TO "/var/opt/mssql/data/ProductCatalog.ldf"'
+
+```
 the output of this command should be similar to 
 
 >Processed 384 pages for database 'ProductCatalog', file  'ProductCatalog' on file 1.
@@ -201,14 +215,6 @@ the output of this command should be similar to
 >Processed 8 pages for database 'ProductCatalog', file 'ProductCatalog_log' on file 1.
 >
 >RESTORE DATABASE successfully processed 392 pages in 0.278 seconds (11.016 MB/sec).
-
-6. Restore the backup:
-```
-      sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
-   -S localhost -U SA -P '1234qwerASDF' \
-   -Q 'RESTORE DATABASE ProductCatalog FROM DISK = "/var/opt/mssql/data/SampleDB.bak" WITH MOVE "ProductCatalog" TO "/var/opt/mssql/data/ProductCatalog.mdf", MOVE "ProductCatalog_log" TO "/var/opt/mssql/data/ProductCatalog.ldf"'
-
-```
 
 If you connect to the instance, you should see that the instance was restored.
  
@@ -241,31 +247,40 @@ Most applications involve multiple containers.
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
+
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
 
-1. Change directory to the mssql-aspcore-example
+1. Change directory to the mssql-aspcore-example.
 
 ```
-cd <path to git folder>/mssql-aspcore-example 
+cd sqllinuxlabs/containers/mssql-aspcore-example 
 ```
+
+>note: if you just finished the **Build your own container** lab, you can navigate to this folder with the following command:
+>
+> `cd ../../containers/mssql-aspcore-example `
 
 2. Open the docker-compose.yml file 
 ```
 nano docker-compose.yml
 ```
 
-3. Edit the SQL Server environment variables then save the file with `ctrl + x`
+3. Edit the `SA_PASSWORD` SQL Server environment variables then save the file with `ctrl + x`
 
 ![DockerCompose.PNG](/Media/Container-DockerCompose.png)
 
-4. Edit the `mssql-aspcore-example-db/db-init.sh` with the SA password that you used to  
+4. Edit the `-P` parameter in the `./mssql-aspcore-example-db/db-init.sh` file with the `SA_PASSWORD` that you used in the previous step 
+```
+nano ./mssql-aspcore-example-db/db-init.sh
+```
 
 ![db-sh.PNG](/Media/Container-db-sh.png)
 
 4. Run the containers with docker-compose:
 ```
-docker-compose up
+sudo docker-compose up
 ```
 >note: this will take approx. 15 seconds
 
@@ -275,7 +290,7 @@ docker-compose up
 ```
 http:<host IP>:5000
 ```
->Note: If you are running this in an Azure VM, the host IP is the Azure VM IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
+>Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
 
 ![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
 
@@ -283,7 +298,7 @@ To stop the docker compose application, press `ctrl + c` in the terminal.
 To remove the containers run the following command:
 
 ```
-docker-compose down
+sudo docker-compose down
 ```
 
 
