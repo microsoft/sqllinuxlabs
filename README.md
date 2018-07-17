@@ -5,19 +5,23 @@ Self-paced labs to learn SQL Server on Linux and Docker Containers.
 
 **Note this github repo is marked PUBLIC but the labs are still a work in progress. Stay tuned when we will have all the initial labs ready to be used.**
 
-To use these self-paced labs you must go through installation of Linux and tools by going through the prelab. Follow the instruction in the readme.md in the **prelab** folder.
+To use these self-paced labs you must go through installation of Linux and tools by going through the prelab. Follow the instruction in the readme.md in the [**prelab**](https://github.com/Microsoft/sqllinuxlabs/tree/master/prelab) folder.
 
 The self-paced labs should be done in the following order:
 
-1. **deploy_and_explore**
+1. [**prelab**](https://github.com/Microsoft/sqllinuxlabs/tree/master/prelab)
+
+    The prelab involves installing an Azure Virtual Machine with Red Hat Enterprise Linux and tools for your laptop to complete the rest of the labs.
+
+2. [**deploy_and_explore**](https://github.com/Microsoft/sqllinuxlabs/tree/master/deploy_and_explore)
 
     In this lab you will learn how to deploy SQL Server, explore files from the SQL Installation, explore various common Linux commands and the bash shell, and perform basic tests to connect to SQL Server on Linux.
 
-2. **auto_tune**
+3. [**auto_tune**](https://github.com/Microsoft/sqllinuxlabs/tree/master/auto_tune)
 
     In this lab you will learn how to observe the Automatic Tuning Feature of SQL Server using SQL Operations Studio. You will learn basics of how to use SQL Operations Studio while understanding how Automatic Tuning can help customers resolve query plan regression problems.
 
-3. **containers and appcompat**
+4. [**containers and appcompat**](https://github.com/Microsoft/sqllinuxlabs/tree/master/containers)
 
     In this lab you will learn the basics of SQL Server with docker containers. Then you will apply these skills to deploy an ASP.Net application using containers. This application uses SQL Server engine features that apply across both SQL Server on Windows and Linux.
 
