@@ -306,7 +306,7 @@ Now you will learn the great compatibility story of SQL Server on Linux by resto
 
 2. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files from the downloaded zip of the gitHub repo into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
 
-    BONUS: Examine these files from the GitHub repo site and use the nano editor to create them on your Linux Server vs copying them.
+    Note: You can skip this step if you have already cloned the git repo in the prelab. If you have done this, the scripts in this lab are in the **sqllinuxlab** subdirectory. You can copy them into your home directory or edit them to ensure you have the right path for the WideWorldImporters backup file.
 
 3. Run the following commands from the bash shell to make the scripts executable (supply the root password if prompted)
 

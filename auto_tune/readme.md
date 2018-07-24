@@ -20,6 +20,8 @@ We will use the WideWorldImporters full sample database for this lab. If you hav
 
 3. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files from the downloaded zip of the gitHub repo into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
 
+     Note: You can skip this step if you have already cloned the git repo in the prelab. If you have done this, the scripts in this lab are in the **sqllinuxlab** subdirectory. You can copy them into your home directory or edit them to ensure you have the right path for the WideWorldImporters backup file.
+
 4. Run the following commands from the bash shell to make the bash shell scripts executable (supply the root password if prompted)
 
     `sudo chmod u+x cpwwi.sh`
