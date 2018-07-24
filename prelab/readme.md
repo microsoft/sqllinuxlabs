@@ -173,3 +173,17 @@ sudo systemctl start docker
 You are now ready to go through the first self-paced lab called **deploy_and_explore**.
 
 You will run the rest of the instructions on using Docker containers for SQL Server in the **containers** lab.
+
+## Optional: Clone the repo in the Linux VM
+
+There are scripts that you will use in the labs on the Linux VM itself. One simple way for you to have access to the scripts to is clone the repo in the Linux VM
+
+1. Install git if not already installed
+
+    `sudo yum install git`
+
+2. Use git to clone the repo
+
+    `git clone https://github.com/Microsoft/sqllinuxlabs.git`
+
+    You should know have a subdirectory in your home directory called **sqllinuxlabs**.

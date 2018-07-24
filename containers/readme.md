@@ -24,7 +24,9 @@ sudo systemctl start docker
 ```
 >Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
  
-2. clone this repo by running the following: 
+2. clone this repo by running the following:
+
+    Note: If you have already done this in the prelab you can skip this step
 
 ```
 sudo yum install git
