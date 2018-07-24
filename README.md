@@ -1,13 +1,11 @@
 
 # SQL Server Linux and Container Labs
 
-Self-paced labs to learn SQL Server on Linux and Docker Containers.
-
-**Note this github repo is marked PUBLIC but the labs are still a work in progress. Stay tuned when we will have all the initial labs ready to be used.**
+Welcome to self-paced labs to learn SQL Server on Linux and Docker Containers.
 
 To use these self-paced labs you must go through installation of Linux and tools by going through the prelab. Follow the instruction in the readme.md in the [**prelab**](https://github.com/Microsoft/sqllinuxlabs/tree/master/prelab) folder.
 
-The self-paced labs should be done in the following order:
+The self-paced labs should be done in the following order. Note the lab on **containers and appcompat** can be done separately after the prelab. The labs on **deploy_and_explore** and **auto_tune** need to be done together and in order.
 
 1. [**prelab**](https://github.com/Microsoft/sqllinuxlabs/tree/master/prelab)
 
