@@ -177,15 +177,14 @@ sudo docker build . -t mssql-with-backup-example
 ```
 ![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
 
-
 5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
-```
+
 sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql2 \
       -d mssql-with-backup-example
 ```
 
-6. View the contents of the backup file built in the image:
+6. Edit the `-P` with the value used for `SA_PASSWORD` used in the previous command and view the contents of the backup file built in the image:
 
 ```
    sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd -S localhost \
@@ -201,7 +200,7 @@ the output of this command should be similar to this:
 >ProductCatalog /var/opt/mssql/data/ProductCatalog.mdf
 >ProductCatalog_log /var/opt/mssql/data/ProductCatalog_log.ldf
 
-7. Restore the backup. Edit the `-P` with `SA_PASSWORD` used in the previous command to start the container:
+7. Edit the `-P` with the value of `SA_PASSWORD` used to start the container and restore the database in the container:
 ```
 sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
    -S localhost -U SA -P YourStrong!Passw0rd \
