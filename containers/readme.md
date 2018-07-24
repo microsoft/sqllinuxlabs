@@ -76,7 +76,7 @@ sudo docker exec -it sql1 bash
 ```
 Use SQLCMD within the container to connect to SQL Server:
 ```
-/opt/mssql-tools/bin/sqlcmd -U SA -P YourStrong!Passw0rd
+/opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'
 ```
 ![sqlcmd.PNG](/Media/Container-ExecSQLCMD.png)
 
