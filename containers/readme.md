@@ -180,7 +180,7 @@ sudo docker build . -t mssql-with-backup-example
 ![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
 
 5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
-
+```
 sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql2 \
       -d mssql-with-backup-example
