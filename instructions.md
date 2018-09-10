@@ -371,7 +371,7 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
     Here is what htop looks like on my Azure Virtual Machine
 
-    ![htop.PNG](../Media/htop.PNG)
+    ![htop.PNG](Media/htop.PNG)
 
     Type "q" to exit the tool
 
