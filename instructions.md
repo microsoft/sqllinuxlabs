@@ -32,6 +32,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 5. Click on the **Create** button at the bottom of the screen
 
+**Note: The user interface in the Azure Portal to create a Virtual Machine is changing soon so the interface may be slightly different. You should be able to read these instructions for what fields to use and fill out for any new interface changes.**
+
 6. Fill out the following fields on the Basics blade
     - Fill in the Name field with a unique hostname
     - Leave VM disk type set to SSD
@@ -47,7 +49,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
         ![rhelvmbasics.png](Media/rhelvmbasics.png)
 
 7. Choose a size for your VM
-    - For purposes of these labs, we recommend a minimum of 4 vCPUs and 16GB RAM. I typically choose a DS13_V2 but you are free to pick any other VM with these minimum sizes (like a D8s_V3).
+    - For purposes of these labs, we recommend a minimum of 4 vCPUs and 16GB RAM. You should not need more than 8vCPUs and 32GB RAM to complete these labs for your VM.
+
     - Click on **Select** when you have chosen your size.
 
 8. Fill out the following fields on the Settings blade
