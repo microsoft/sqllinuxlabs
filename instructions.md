@@ -84,7 +84,6 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
         ![AzureVMDNSname.PNG](Media/AzureVMDNSname.PNG)
 
 14. Your resources page should now show the DNS name you created (you may need to select Refresh).
-1. 
 
 15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
 
@@ -243,7 +242,7 @@ Run all of the following commands from your ssh session with the bash shell. Thi
 
 Believe it or not, that's it! You have now installed SQL Server on Linux which includes the core database engine and SQL Server Agent.
 
-5. TODO: Add in instructions to open up MSSQL port (1433) for Azure VM.
+5. Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1433 to external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Use port 1433 when using this example.
 
 ### Explore the SQL Server installation
 
