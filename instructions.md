@@ -2,10 +2,12 @@
 
 ## Prelab setup for SQL Server on Linux Labs
 
-This lab is required to setup your environment and tools to use the other labs. In order to complete the prelab, you will need the following:
+This lab is required to setup your environment and tools to use the other labs. The workshop provides the necessary login and resources for:
 
-- An Azure subscription
-- A Windows, Linux, or MacOS Client computer. You can use another Azure VM running Windows or Linux as a client. Note: Currently the labs are only setup for Windows clients. It is possible to complete other labs with macOS and Linux clients provided you have a ssh program and install SQL Operations Studio.
+- An Azure login so you provision an Azure Virtual Machine running Linux.
+- A virtual machine running Windows 10 to install client tools and use them to interact with the Azure Virtual Machine and SQL Server.
+
+The Resource tab on this lab page has login information for both Azure and the Windows 10 Virtual Machine.
 
 The prelab is divided into four sections:
 
@@ -18,7 +20,7 @@ The prelab is divided into four sections:
 
 For this first step in the prelab, you will learn how to deploy an Azure Virtual Machine running Red Hat Enterprise Linux. You will not install SQL Server during this prelab. You will do this in the first lab called **deploy_and_explore**.
 
-1. Login into the Azure portal at <http://portal.azure.com>
+1. Login into the Azure portal using the Resources tab. A new window will come up and prompt you to put in account information. If necessary choose "Use another account". Copy and paste the Username and Password when prompted for an eamil and password. You will placed into the Azure portal (Select Maybe later to skip the Azure Tour).
 
 2. Click on **+ Create a resource**
 
@@ -38,8 +40,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Type in and Confirm a password that meets requirements. **IMPORTANT: This password will be used to login to the Linux VM. It is the root password which you will use with the sudo command in the labs. So secure and save this password.**
     - Leave AAD Disabled
     - Choose your Subscription
-    - Type in a new Resource Group name or select an existing one you have already created
-    - Choose a location for your VM
+    - Use the existing resource group provided
+    - Choose a location for your VM (The default is East US which should work fine for this lab)
     - Click on OK
 
         ![rhelvmbasics.png](Media/rhelvmbasics.png)
@@ -53,8 +55,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Leave Managed Disks set to Yes
     - Leave all Network fields set to default
     - Leave Network Security Group set to Basic
-    - Select SSH (22) and MS SQL (1433) for public inbound ports
-    - Note: You are exposing your VM and SQL Server to a public port. To provide less exposure you can configure your VM after it is deployed to only allow specific IP addresses from your client computer to access the VM or SQL Server. Or if you choose to use an Azure VM as a client you do not have to choose this option provided you have setup your Azure VM as a client to access the Linux VM (such as placing the client Azure VM in the same virtual network)
+    - Select SSH (22) for public inbound ports
     - Leave all other fields with default settings
     - Click OK
 
@@ -82,7 +83,8 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![AzureVMDNSname.PNG](Media/AzureVMDNSname.PNG)
 
-14. Your resources page should now show the DNS name you created
+14. Your resources page should now show the DNS name you created (you may need to select Refresh).
+1. 
 
 15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
 
@@ -92,9 +94,11 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 ### Installing tools on your client
 
-**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to use any ssh client you like. However, if you already have a preferred ssh client installed, be sure you update to the latest version. One option that may be interesting is the Azure Cloud Shell at <https://shell.azure.com>**
+**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to install and use any ssh client you like in the Windows 10 virtual machine.
 
-1. Install the MobaXterm client application from <https://mobaxterm.mobatek.net/download-home-edition.html>
+Note: Do not click on the hyperlinks in these instructions. Use these links to install the client software in the Windows 10 virtual machine.
+
+1. Login to the Windows 10 Virtual Machine. the Username and Password are in the Resources tabl. You can use click on the "T" to autofill the password on the Login screen for Windows 10. Once logged in, install the MobaXterm client application from <https://mobaxterm.mobatek.net/download-home-edition.html>
 
     - Choose the Installer Edition which in your browser will download a file called MobaXterm_Installer_v10.7.zip to your Downloads folder
     - Extract all the files from the zip file
@@ -110,6 +114,9 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
         ![sqlopstudioversion.png](Media/sqlopstudioversion.png)
 
 3. Install the latest SQL Server Management Studio (SSMS) from <https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms>
+
+Note: If you are pressed for time, installing SSMS is optional and can be skipped. There are labs to use SSMS to connect to SQL Server on Linux but they are not the core aspect to these labs.
+
     - If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
     - Please make sure you are running at minimum version 17.7
     - You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
@@ -235,6 +242,8 @@ Run all of the following commands from your ssh session with the bash shell. Thi
     `sudo firewall-cmd --reload`
 
 Believe it or not, that's it! You have now installed SQL Server on Linux which includes the core database engine and SQL Server Agent.
+
+5. TODO: Add in instructions to open up MSSQL port (1433) for Azure VM.
 
 ### Explore the SQL Server installation
 
@@ -593,3 +602,441 @@ In this lab, if you are using a Windows client, see how SQL Server Management St
 
 2. Use Object Explorer and the Query Editor just like you would a normal SQL Server instance. Go through some of the steps in the SSMS tutorial in our documentation at <https://docs.microsoft.com/sql/ssms/tutorials/tutorial-sql-server-management-studio>
 
+## Automatic Tuning and SQL Tooling Lab for SQL Server on Linux
+
+**STOP: This lab requires you have already followed the instructions in the prelab**
+
+This self-paced lab demonstrates the Automatic Tuning (Auto Plan Correction) feature of SQL Server on Linux. As part of this lab you will learn fundamentals of using SQL Operations Studio, which you should have installed as part of the prelab.
+
+Automatic Tuning in SQL Server is a feature that uses the rich telemetry of Query Store to detect query plan regression issues. By default, if the Query Store is enabled for a database, SQL Server can detect query plan regression problems and provide recommendations through a Dynamic Management View. In addition, if the Automatic Tuning feature is enabled for a database, SQL Server can detect the query plan regression and correct it automatically by reverting to a previous "known good" plan.
+
+You can watch a demonstration of this lab on YouTube at <https://www.youtube.com/watch?v=Sh8W7IFX390>
+
+### Lab Setup
+
+We will use the WideWorldImporters full sample database for this lab. If you have already restored this in the deploy_and_explore lab you can skip the Lab Setup section. **This lab assumes you have already installed SQL Server for Linux on RHEL (requires Developer or Enterprise Edition) and SQL Server command line tools**.
+
+1. Connect with ssh to your Linux Server and run the following command to copy this database to your Linux Server
+
+    `wget https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak`
+
+2. Depending on your network speed this should take no more than a few minutes
+
+3. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files from the downloaded zip of the gitHub repo into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
+
+     Note: You can skip this step if you have already cloned the git repo in the prelab. If you have done this, the scripts in this lab are in the **sqllinuxlab** subdirectory. You can copy them into your home directory or edit them to ensure you have the right path for the WideWorldImporters backup file.
+
+4. Run the following commands from the bash shell to make the bash shell scripts executable (supply the root password if prompted)
+
+    `sudo chmod u+x cpwwi.sh`
+
+    `sudo chmod u+x restorewwi.sh`
+
+5. Copy the backup file to the SQL Server directory so it can access the file and change permissions on the backup file by executing the following command in the bash shell
+
+    `./cpwwi.sh`
+
+6. Now restore the database by executing the following command from the bash shell
+
+    `./restorewwi.sh`
+
+7. When this command completes successfully the output in your ssh session should look like the following
+
+    ![afterrestorewwi.png](Media/afterrestorewwi.png)
+
+### Query Plan Regression Recommendations
+
+Here is the scenario this lab is trying to demonstrate. When you execute a stored procedure in SQL Server, the engine can use a technique called parameter sniffing to compile a query plan based on parameter values of the stored procedure. If the value of the parameter from the procedure is used in a query comparing to a column that has skewed values, the query plan chosen when the query is compiled may not be optimal. 
+
+This can result in a situation where the initial query plan is fine based on a value that is not skewed, but then an unexpected event could cause the plan to be evicted from cache (Ex. memory pressure) and a new plan could be compiled based on a parameter value that is skewed. And it is possible this new plan may not perform well for all users. If this problem occurs, it is considered a query plan regression. This is because a new query plan for the same query yields in poor performance vs previous version of the query plan.
+
+For this lab, we will create a new stored procedure that will accept an integer parameter value and query tables in the WideWorldImporters database that may result in a query plan regression problem. For this section of the lab, we will execute T-SQL scripts in SQL Operations Studio
+
+1. Use SQL Operations Studio to open up the file **setup.sql**. Use the File menu of SQL Operations Studio to select Open File... and find the setup.sql on your local drive where you have copied or cloned these labs.
+
+2. Click on the Run button as seen from the screenshot below
+
+    ![autotunesetup.PNG](Media/autotunesetup.PNG)
+
+3. You will be prompted with a connection screen to put in information about the Linux Server. Fill in the name of the Linux Server you have created for these labs. For Azure put in the complete hostname as you used for ssh connection (without the username). For example, bwsqllabs.westus.cloudapp.azure.com. Supply the sa login and password and check the Remember password option. This script creates a stored procedure called report and other procedures used to help automate pieces of the lab. You will use the same process to open up and execute remaining T-SQL scripts. And each tine you connect you can use a previous connect from Recent History.Once you have executed a script and select Remember Password, you will not have to reconnect.
+
+    Examine the contents of setup.sql to see what these procedures do. Note that Query Store was enabled before the WideWorldImporters database sample was backed up. Close out this script when you are done.
+
+4. Execute the T-SQL script **initialize.sql** to clear the query store. Once you execute this script, close out the window.
+
+5. Open up the T-SQL script **batchrequests_perf_collector.sql** and examine it. In order to observe workload performance we need to monitor Batch Requests/Sec. But Windows Performance Monitor does not work with SQL Server on Linux. Therefore this script will collect Batch Requests/Sec from the DMV dm_os_performance_counters in a loop storing them in a global temporary table. This will effectively be our "perfmon" to query and find out workload throughput. Hold off executing this script.
+
+6. Open up the script **batchrequests.sql**. This script will query the global temporary table. When we execute the script, we will be able to use the built-in charting capabilities of SQL Operations Studio to view the workload throughput in a chart (kind of like a static perfmon chart). Notice the results are produced in a format of counter, time, value. Hold off executing this script.
+
+7. Open up the script **report.sql**. This script is the workload simulator running the report procedure in a loop of batches. Hold off executing this script.
+
+8. Now run the T-SQL in the script batchrequests_perf_collector.sql and report.sql. Wait for about 20 seconds for these to execute before going to the next step.
+
+9. Now execute the T-SQL in the script batchrequests.sql. Select the icon to the right to view as chart after the results are displayed (Note: Your numbers may look slightly different)
+
+    ![batchrequestsfirstpass.PNG](Media/batchrequestsfirstpass.PNG)
+
+10. Select Chart Type and pick timeSeries. Your chart should show the throughput for Batch Requests/Sec. The numbers will vary but it should look something like the following (Notice the fairly consistent throughput from middle to right of the chart)
+
+    ![batchrequestsfirstpasschart.png](Media/batchrequestsfirstpasschart.png)
+
+11. Now open up the script **regression.sql** and execute the T-SQL. This will run the regression procedure will will simulate a query plan regression problem. It will free the plan cache and then run the report procedure with a different parameter value. Note: The report.sql batch is running in a tight loop so you may have to run this 2-3 times to see the regression.
+
+12. Run the script batchrequests.sql again and observe the chart. You should see a drop in performance like the following
+
+    ![batchrequestsregression.png](Media/batchrequestsregression.png)
+
+13. Open up the script **recommendations.sql** and execute it. The results show a query plan regression has been detected. Note the values of columns
+
+    The **reason** column shows the avg CPU increased by 4x for the same query with a new query plan. We choose CPU since overall duration could vary based on an event that is not a true plan regression (Ex. blocking or slow I/O)
+
+    The **state_transition_reason** column shows that Automatic Tuning is not enabled.
+
+    The **script** column shows a T-SQL statement you can run to resolve the issue by reverting to a previous plan where performance was good. 
+
+    ![initialrecommendations.png](Media/initialrecommendations.png)
+
+14. Hit Cancel in the windows for batchrequests_perf_collector.sql and report.sql to stop these batches. **Note: We are chasing down an obscure bug with SQL Operations Studio where in some cases these queries cannot be cancelled after running for a certain period of time. If this occurs, exit and restart SQL Operations Studio to go to the next steps in the lab.**
+
+You now have observed how with Query Store enabled SQL Server can detect and recommend query plan regression problems. You also have recommendations on how to resolve the problem yourself manually.
+
+### Automatic Tuning in Action
+
+In this section of the lab, we will see the same type of query plan regression behavior as before except this time with Automatic Tuning enabled, SQL Server will automatically resolve the problem.
+
+**Note: Do not run setup.sql or initialize.sql again for this part of the lab.**
+
+1. Open up and execute the script **auto_tune.sql**. This is like initialize.sql except it enables automatic tuning. Close out this script
+
+2. All the other scripts should still be open in SQL Operation Studio. You will go through the same steps as you did above starting with **step 8** in the previous section. Except, after running regression.sql, wait for a few seconds before running batchrequests.sql to see how SQL Server will automatically resolve the regression. In fact, the performance of the workload may go up slightly since the plan is being forced (not a guarantee in all cases).
+
+3. If SQL Server has corrected the problem, the chart from batchrequests.sql should look something like this
+
+    ![batchrequestsautocorrect.png](Media/batchrequestsautocorrect.png)
+
+4. Run recommendations.sql again and see the results. They should be similar except the state_transition_reason now says LastGoodPlanForced indicating SQL Server has automatically corrected the query plan regression problem
+
+    ![autocorrectedrecommendations.png](Media/autocorrectedrecommendations.png)
+
+You have seen that by default if Query Store is enabled, SQL Server can pinpoint and recommend query plan regression performance problems. Then, if you are comfortable, you can enable automatic tuning and let SQL Server correct these types of problems automatically.
+
+## SQL Server Containers Lab
+
+### Pre Lab
+1. Install docker engine by running the following:
+```
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
+
+sudo yum install docker-ce
+ ```
+
+check status of docker engine:
+```
+sudo systemctl status docker
+ ```
+
+if is not running, start it by running:
+``` 
+sudo systemctl start docker
+```
+>Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
+ 
+2. clone this repo by running the following:
+
+    Note: If you have already done this in the prelab you can skip this step
+
+```
+sudo yum install git
+git clone https://github.com/Microsoft/sqllinuxlabs.git
+```
+---
+
+### Lab
+#### 1. Getting started with SQL Server in Containers
+
+##### Introduction
+In this section you will run SQL Server in a container and connect to it with SSMS/SQL Operations Studio. This is the easiest way to get started with SQL Server in containers.  
+ 
+##### Steps
+1. Change the `SA_PASSWORD` in the command below and run it in your terminal:
+``` 
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
+      -p 1500:1433 --name sql1 \
+      -d microsoft/mssql-server-linux:2017-latest
+ ```
+
+> Tip: edit commands in a text editor prior to pasting in the terminal to easily edit the commands.
+>
+> Note: By default, the password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols.
+
+ 
+2. Check that SQL Server is running:
+```
+sudo docker ps
+```
+
+![GettingStartedResults.PNG](/Media/Container-GettingStartedResults.png)
+
+3. Connect to SQL Server in container using SSMS or SQL Ops Studio.
+
+Open SSMS or Ops studio and connect to the SQL Server in container instance by connecting host:
+
+```
+<host IP>, 1500
+```
+>Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
+
+![GettingStartedOpsStudio.PNG](/Media/Container-GettingStartedOpsStudio.png)
+
+3. Run SQLCMD inside the container. First run bash interactively in the container with docker execute 'bash' inside 'sql1' container. 
+
+```
+sudo docker exec -it sql1 bash
+```
+Use SQLCMD within the container to connect to SQL Server:
+```
+/opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'
+```
+![sqlcmd.PNG](/Media/Container-ExecSQLCMD.png)
+
+Exit SQLCMD and the container with exit:
+```
+exit
+```
+
+> **Key Takeaway**
+> 
+>SQL Server running in a container is the same SQL Server engine as it is on Linux OS or Windows.
+ 
+---
+
+#### 2. Explore Docker Basics
+##### Introduction
+ In this section you'll learn the basics of how to navigate container images and active containers on your host.
+
+##### Steps
+Enter the following commands in your terminal.
+
+See the active container instances:
+```
+sudo docker ps
+```
+List all container images:
+```
+sudo docker image ls
+```
+Stop the SQL Server container:
+```
+sudo docker stop sql1
+```
+See that `sql1` is no longer running by listing all containers: 
+```
+sudo docker ps -a
+```
+Delete the container:
+```
+sudo docker rm sql1
+```
+See that the container no longer exists:
+```
+sudo docker container ls
+```
+![DockerCommands.PNG](/Media/Container-DockerCommands.png)
+
+> **Key Takeaway**
+>
+> A container is launched by running an image. An **image** is an executable package that includes everything needed to run an application--the code, a runtime, libraries, environment variables, and configuration files.
+>
+>A **container** is a runtime instance of an image--what the image becomes in memory when executed (that is, an image with state, or a user process). You can see a list of your running containers with the command, docker ps, just as you would in Linux.
+> 
+> -- https://docs.docker.com/get-started/
+ 
+---
+
+#### 3.  Build your own container 
+
+##### Introduction:
+In the past, if you were to set up a new SQL Server environment or dev test, your first order of business was to install a SQL Server onto your machine. But, that creates a situation where the environment on your machine might not match test/production.
+
+With Docker, you can get SQL Server as an image, no installation necessary. Then, your build can include the base SQL Server image right alongside any additional environment needs, ensuring that your SQL Server instance, its dependencies, and the runtime, all travel together.
+
+In this section you will build your a own container layered on top of the SQL Server image. 
+
+Scenario: Let's say for testing purposes you want to start the container with the same state. We’ll copy a .bak file into the container which can be restored with T-SQL.  
+ 
+##### Steps:
+
+1. Change directory to the `mssql-custom-image-example folder`.
+```
+cd sqllinuxlabs/containers/mssql-custom-image-example/
+```
+
+
+2. Create a Dockerfile with the following contents
+```
+cat <<EOF>> Dockerfile
+FROM microsoft/mssql-server-linux:latest
+COPY ./SampleDB.bak /var/opt/mssql/data/SampleDB.bak
+CMD ["/opt/mssql/bin/sqlservr"]
+EOF
+```
+
+3. View the contents of the Dockerfile 
+
+```
+cat Dockerfile
+```
+![dockerfile.PNG](/Media/Container-Dockerfile.png)
+
+4. Run the following to build your container
+```
+sudo docker build . -t mssql-with-backup-example
+```
+![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
+
+5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
+```
+sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
+      -p 1500:1433 --name sql2 \
+      -d mssql-with-backup-example
+```
+
+6. Edit the `-P` with the value used for `SA_PASSWORD` used in the previous command and view the contents of the backup file built in the image:
+
+```
+   sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd -S localhost \
+   -U SA -P 'YourStrong!Passw0rd' \
+   -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/data/SampleDB.bak"' \
+   -W \
+   | tr -s ' ' | cut -d ' ' -f 1-2
+```
+
+the output of this command should be similar to this:
+>LogicalName PhysicalName
+>----------- ------------
+>ProductCatalog /var/opt/mssql/data/ProductCatalog.mdf
+>ProductCatalog_log /var/opt/mssql/data/ProductCatalog_log.ldf
+
+7. Edit the `-P` with the value of `SA_PASSWORD` used to start the container and restore the database in the container:
+```
+sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
+   -S localhost -U SA -P YourStrong!Passw0rd \
+   -Q 'RESTORE DATABASE ProductCatalog FROM DISK = "/var/opt/mssql/data/SampleDB.bak" WITH MOVE "ProductCatalog" TO "/var/opt/mssql/data/ProductCatalog.mdf", MOVE "ProductCatalog_log" TO "/var/opt/mssql/data/ProductCatalog.ldf"'
+
+```
+the output of this command should be similar to 
+
+>Processed 384 pages for database 'ProductCatalog', file  'ProductCatalog' on file 1.
+>
+>Processed 8 pages for database 'ProductCatalog', file 'ProductCatalog_log' on file 1.
+>
+>RESTORE DATABASE successfully processed 392 pages in 0.278 seconds (11.016 MB/sec).
+
+If you connect to the instance, you should see that the database was restored.
+ 
+![RestoredDB.PNG](/Media/Container-RestoredDB.png)
+
+7. Clean up the container
+```
+sudo docker stop sql2
+sudo docker container rm sql2
+```
+
+
+> **Key Takeaway**
+>
+> A **Dockerfile** defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile behaves exactly the same wherever it runs.
+>
+> -- https://docs.docker.com/get-started/part2/#your-new-development-environment
+---
+
+ #### 4. Run a Containerized Application with SQL Server
+ 
+ ##### Introduction
+  
+Most applications involve multiple containers. 
+
+##### Steps
+
+1. Install docker-compose:
+```
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
+
+
+1. Change directory to the mssql-aspcore-example.
+
+```
+cd sqllinuxlabs/containers/mssql-aspcore-example 
+```
+
+>note: if you just finished the **Build your own container** lab, you can navigate to this folder with the following command:
+>
+> `cd ../../containers/mssql-aspcore-example `
+
+2. Open the docker-compose.yml file 
+```
+nano docker-compose.yml
+```
+
+3. Edit the `SA_PASSWORD` SQL Server environment variables then save the file with `ctrl + x`
+
+![DockerCompose.PNG](/Media/Container-DockerCompose.png)
+
+4. Edit the `-P` parameter in the `./mssql-aspcore-example-db/db-init.sh` file with the `SA_PASSWORD` that you used in the previous step 
+```
+nano ./mssql-aspcore-example-db/db-init.sh
+```
+
+![db-sh.PNG](/Media/Container-db-sh.png)
+
+4. Run the containers with docker-compose:
+```
+sudo docker-compose up
+```
+>note: this will take approx. 15 seconds
+
+
+5. At this point, you will have two containers up and running: an application container that is able to query the database container. Connect to the 
+
+```
+http:<host IP>:5000
+```
+>Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Be sure to open up port 5000 based on this example.
+
+![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
+
+To stop the docker compose application, press `ctrl + c` in the terminal. 
+To remove the containers run the following command:
+
+```
+sudo docker-compose down
+```
+
+
+#### Start-up Explanation
+
+1. Running `docker-compose up` builds/pulls containers and run them with parameters defined in docker-compose.yml
+2. The .Net Core application container starts up  
+3. The SQL Server container starts up with `entrypoint.sh`
+
+    a. The sqlservr process starts 
+
+    b. A start script is run to apply schema needed by application     
+
+4. The .Net Core application is now able to connect to the SQL Server container with all necessary 
+
+
+> **Key Takeaway**
+>
+> **Compose** is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
+>
+> --https://docs.docker.com/compose/overview/
