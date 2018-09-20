@@ -155,25 +155,21 @@ Note: Remove any previous installations of Docker from your RHEL image by execut
 
 2 . Install docker engine by running the following:
 
-```
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+`sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
 
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+`sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
 
-sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
+`sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm`
 
-sudo yum install docker-ce
- ```
+`sudo yum install docker-ce`
 
 check status of docker engine:
-```
-sudo systemctl status docker
- ```
+
+`sudo systemctl status docker`
 
 if is not running, start it by running:
-``` 
-sudo systemctl start docker
-```
+
+`sudo systemctl start docker`
 
 Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
  
