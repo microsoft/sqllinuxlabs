@@ -441,11 +441,8 @@ Let's install the SQL command line tools including sqlcmd (Note: you can also in
     `sqlcmd -Usa -Slocalhost`
 
     Put in your sa password. At the sqlcmd prompt, run the following T-SQL statement
-
-    ```sql
-    SELECT @@VERSION
-    GO
-    ```
+    
+    `SELECT @@VERSION;`
 
     You should get results similar to the following (Your version could vary depending on the latest Cumulative Update available)
 
@@ -475,9 +472,7 @@ You will perform the same tasks to install the new open source, cross-platform t
 
 5. You should get a new prompt like sqlcmd. At this prompt type in the following T-SQL command and hit Enter
 
-    ```sql
-    SELECT @@VERSION
-    ```
+    `SELECT @@VERSION;`
 
     Notice as you started typing you see Intellisense functionality kick-in which is one of the differences from sqlcmd.
 
@@ -529,7 +524,7 @@ Now you will learn the great compatibility story of SQL Server on Linux by resto
 
 8. From the sqlcmd prompt run these commands
 
-    ```sql
+    ```
     USE WideWorldImporters
     GO
     SELECT * FROM [Sales].[Customers]
@@ -586,10 +581,8 @@ Let's say you wanted to enable trace flag 1222 for deadlock details to be report
 
 4. BONUS: Use sqlcmd or mssql-cli to verify this trace flag is set by running the following T-SQL statement
 
-    ```sql
-    DBCC TRACESTATUS(-1)
-    ```
-
+    `DBCC TRACESTATUS(-1);`
+ 
     The results should show that trace flag 1222 is setup globally like the following
 
     ![dbcctracestatus.PNG](Media/dbcctracestatus.PNG)
@@ -724,35 +717,33 @@ You have seen that by default if Query Store is enabled, SQL Server can pinpoint
 
 ### Pre Lab
 1. Install docker engine by running the following:
-```
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+`sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
 
-sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm
+`sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
 
-sudo yum install docker-ce
- ```
+`sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm`
+
+`sudo yum install docker-ce`
 
 check status of docker engine:
-```
-sudo systemctl status docker
- ```
+
+`sudo systemctl status docker`
 
 if is not running, start it by running:
-``` 
-sudo systemctl start docker
-```
+
+`sudo systemctl start docker`
+
 >Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
  
 2. clone this repo by running the following:
 
     Note: If you have already done this in the prelab you can skip this step
 
-```
-sudo yum install git
-git clone https://github.com/Microsoft/sqllinuxlabs.git
-```
+
+`sudo yum install git`
+`git clone https://github.com/Microsoft/sqllinuxlabs.git`
+
 ---
 
 ### Lab
@@ -763,11 +754,11 @@ In this section you will run SQL Server in a container and connect to it with SS
  
 ##### Steps
 1. Change the `SA_PASSWORD` in the command below and run it in your terminal:
-``` 
-sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
+ 
+
+`sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql1 \
-      -d microsoft/mssql-server-linux:2017-latest
- ```
+      -d microsoft/mssql-server-linux:2017-latest`
 
 > Tip: edit commands in a text editor prior to pasting in the terminal to easily edit the commands.
 >
@@ -775,9 +766,8 @@ sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
 
  
 2. Check that SQL Server is running:
-```
-sudo docker ps
-```
+
+`sudo docker ps`
 
 ![GettingStartedResults.PNG](/Media/Container-GettingStartedResults.png)
 
@@ -785,28 +775,26 @@ sudo docker ps
 
 Open SSMS or Ops studio and connect to the SQL Server in container instance by connecting host:
 
-```
-<host IP>, 1500
-```
+
+`<host IP>, 1500`
+
 >Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
 
 ![GettingStartedOpsStudio.PNG](/Media/Container-GettingStartedOpsStudio.png)
 
 3. Run SQLCMD inside the container. First run bash interactively in the container with docker execute 'bash' inside 'sql1' container. 
 
-```
-sudo docker exec -it sql1 bash
-```
+`sudo docker exec -it sql1 bash`
+
 Use SQLCMD within the container to connect to SQL Server:
-```
+
 /opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'
-```
+
 ![sqlcmd.PNG](/Media/Container-ExecSQLCMD.png)
 
 Exit SQLCMD and the container with exit:
-```
-exit
-```
+
+`exit`
 
 > **Key Takeaway**
 > 
@@ -822,29 +810,29 @@ exit
 Enter the following commands in your terminal.
 
 See the active container instances:
-```
-sudo docker ps
-```
+
+`sudo docker ps`
+
 List all container images:
-```
-sudo docker image ls
-```
+
+`sudo docker image ls`
+
 Stop the SQL Server container:
-```
-sudo docker stop sql1
-```
+
+`sudo docker stop sql1`
+
 See that `sql1` is no longer running by listing all containers: 
-```
-sudo docker ps -a
-```
+
+`sudo docker ps -a`
+
 Delete the container:
-```
-sudo docker rm sql1
-```
+
+`sudo docker rm sql1`
+
 See that the container no longer exists:
-```
-sudo docker container ls
-```
+
+`sudo docker container ls`
+
 ![DockerCommands.PNG](/Media/Container-DockerCommands.png)
 
 > **Key Takeaway**
@@ -871,49 +859,48 @@ Scenario: Let's say for testing purposes you want to start the container with th
 ##### Steps:
 
 1. Change directory to the `mssql-custom-image-example folder`.
-```
-cd sqllinuxlabs/containers/mssql-custom-image-example/
-```
 
+`cd sqllinuxlabs/containers/mssql-custom-image-example/`
 
 2. Create a Dockerfile with the following contents
-```
-cat <<EOF>> Dockerfile
-FROM microsoft/mssql-server-linux:latest
-COPY ./SampleDB.bak /var/opt/mssql/data/SampleDB.bak
-CMD ["/opt/mssql/bin/sqlservr"]
-EOF
-```
+
+`cat <<EOF>> Dockerfile`
+
+`FROM 
+microsoft/mssql-server-linux:latest`
+
+`COPY ./SampleDB.bak /var/opt/mssql/data/SampleDB.bak`
+
+`CMD ["/opt/mssql/bin/sqlservr"]`
+
+`EOF`
 
 3. View the contents of the Dockerfile 
 
-```
-cat Dockerfile
-```
+
+`cat Dockerfile`
+
 ![dockerfile.PNG](/Media/Container-Dockerfile.png)
 
 4. Run the following to build your container
-```
-sudo docker build . -t mssql-with-backup-example
-```
+
+`sudo docker build . -t mssql-with-backup-example`
+
 ![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
 
 5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
-```
-sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
+
+`sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=YourStrong!Passw0rd' \
       -p 1500:1433 --name sql2 \
-      -d mssql-with-backup-example
-```
+      -d mssql-with-backup-example`
 
 6. Edit the `-P` with the value used for `SA_PASSWORD` used in the previous command and view the contents of the backup file built in the image:
 
-```
-   sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd -S localhost \
+`sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd -S localhost \
    -U SA -P 'YourStrong!Passw0rd' \
    -Q 'RESTORE FILELISTONLY FROM DISK = "/var/opt/mssql/data/SampleDB.bak"' \
    -W \
-   | tr -s ' ' | cut -d ' ' -f 1-2
-```
+   | tr -s ' ' | cut -d ' ' -f 1-2`
 
 the output of this command should be similar to this:
 >LogicalName PhysicalName
@@ -922,12 +909,11 @@ the output of this command should be similar to this:
 >ProductCatalog_log /var/opt/mssql/data/ProductCatalog_log.ldf
 
 7. Edit the `-P` with the value of `SA_PASSWORD` used to start the container and restore the database in the container:
-```
-sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
-   -S localhost -U SA -P YourStrong!Passw0rd \
-   -Q 'RESTORE DATABASE ProductCatalog FROM DISK = "/var/opt/mssql/data/SampleDB.bak" WITH MOVE "ProductCatalog" TO "/var/opt/mssql/data/ProductCatalog.mdf", MOVE "ProductCatalog_log" TO "/var/opt/mssql/data/ProductCatalog.ldf"'
 
-```
+`sudo docker exec -it sql2 /opt/mssql-tools/bin/sqlcmd \
+   -S localhost -U SA -P YourStrong!Passw0rd \
+   -Q 'RESTORE DATABASE ProductCatalog FROM DISK = "/var/opt/mssql/data/SampleDB.bak" WITH MOVE "ProductCatalog" TO "/var/opt/mssql/data/ProductCatalog.mdf", MOVE "ProductCatalog_log" TO "/var/opt/mssql/data/ProductCatalog.ldf"'`
+
 the output of this command should be similar to 
 
 >Processed 384 pages for database 'ProductCatalog', file  'ProductCatalog' on file 1.
@@ -941,11 +927,9 @@ If you connect to the instance, you should see that the database was restored.
 ![RestoredDB.PNG](/Media/Container-RestoredDB.png)
 
 7. Clean up the container
-```
-sudo docker stop sql2
-sudo docker container rm sql2
-```
 
+`sudo docker stop sql2`
+`sudo docker container rm sql2`
 
 > **Key Takeaway**
 >
@@ -963,53 +947,46 @@ Most applications involve multiple containers.
 ##### Steps
 
 1. Install docker-compose:
-```
-sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
-sudo chmod +x /usr/local/bin/docker-compose
+`sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose`
 
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
+`sudo chmod +x /usr/local/bin/docker-compose`
 
+`sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`
 
 1. Change directory to the mssql-aspcore-example.
 
-```
-cd sqllinuxlabs/containers/mssql-aspcore-example 
-```
+`cd sqllinuxlabs/containers/mssql-aspcore-example`
 
 >note: if you just finished the **Build your own container** lab, you can navigate to this folder with the following command:
 >
 > `cd ../../containers/mssql-aspcore-example `
 
 2. Open the docker-compose.yml file 
-```
-nano docker-compose.yml
-```
+
+`nano docker-compose.yml`
 
 3. Edit the `SA_PASSWORD` SQL Server environment variables then save the file with `ctrl + x`
 
 ![DockerCompose.PNG](/Media/Container-DockerCompose.png)
 
 4. Edit the `-P` parameter in the `./mssql-aspcore-example-db/db-init.sh` file with the `SA_PASSWORD` that you used in the previous step 
-```
-nano ./mssql-aspcore-example-db/db-init.sh
-```
+
+`nano ./mssql-aspcore-example-db/db-init.sh`
 
 ![db-sh.PNG](/Media/Container-db-sh.png)
 
 4. Run the containers with docker-compose:
-```
-sudo docker-compose up
-```
+
+`sudo docker-compose up`
+
 >note: this will take approx. 15 seconds
 
 
 5. At this point, you will have two containers up and running: an application container that is able to query the database container. Connect to the 
 
-```
-http:<host IP>:5000
-```
+`http:<host IP>:5000`
+
 >Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Be sure to open up port 5000 based on this example.
 
 ![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
@@ -1017,9 +994,8 @@ http:<host IP>:5000
 To stop the docker compose application, press `ctrl + c` in the terminal. 
 To remove the containers run the following command:
 
-```
-sudo docker-compose down
-```
+
+`sudo docker-compose down`
 
 
 #### Start-up Explanation
