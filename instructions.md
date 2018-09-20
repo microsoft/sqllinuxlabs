@@ -116,11 +116,13 @@ Note: Do not click on the hyperlinks in these instructions. Use these links to i
 
 Note: If you are pressed for time, installing SSMS is optional and can be skipped. There are labs to use SSMS to connect to SQL Server on Linux but they are not the core aspect to these labs.
 
-    - If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
-    - Please make sure you are running at minimum version 17.7
-    - You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
+If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
 
-        ![ssmsversion.png](Media/ssmsversion.png)
+Please make sure you are running at minimum version 17.7
+
+You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
+
+![ssmsversion.png](Media/ssmsversion.png)
 
 ### Connecting to your Linux VM with ssh
 
@@ -172,7 +174,8 @@ if is not running, start it by running:
 ``` 
 sudo systemctl start docker
 ```
->Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
+
+Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
  
 You are now ready to go through the first self-paced lab called **deploy_and_explore**.
 
