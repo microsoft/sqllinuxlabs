@@ -788,7 +788,7 @@ Open SSMS or Ops studio and connect to the SQL Server in container instance by c
 
 Use SQLCMD within the container to connect to SQL Server:
 
-/opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'
+`/opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'`
 
 ![Container-ExecSQLCMD.png](Media/Container-ExecSQLCMD.png)
 
@@ -936,10 +936,8 @@ If you connect to the instance, you should see that the database was restored.
 > A **Dockerfile** defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile behaves exactly the same wherever it runs. 
 https://docs.docker.com/get-started/part2/#your-new-development-environment
 
- #### 4. Run a Containerized Application with SQL Server
+#### 4. Run a Containerized Application with SQL Server
  
- ##### Introduction
-  
 Most applications involve multiple containers. 
 
 ##### Steps
@@ -996,7 +994,7 @@ To remove the containers run the following command:
 `sudo docker-compose down`
 
 
-#### Start-up Explanation
+##### Start-up Explanation
 
 1. Running `docker-compose up` builds/pulls containers and run them with parameters defined in docker-compose.yml
 2. The .Net Core application container starts up  
