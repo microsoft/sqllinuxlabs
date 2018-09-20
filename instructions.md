@@ -240,9 +240,11 @@ Run all of the following commands from your ssh session with the bash shell. Thi
 
     `sudo firewall-cmd --reload`
 
+5. Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1433 to external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Use port 1433 when using this example.
+
 Believe it or not, that's it! You have now installed SQL Server on Linux which includes the core database engine and SQL Server Agent.
 
-5. Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1433 to external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Use port 1433 when using this example.
+
 
 ### Explore the SQL Server installation
 
