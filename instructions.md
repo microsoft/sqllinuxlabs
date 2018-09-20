@@ -769,7 +769,7 @@ In this section you will run SQL Server in a container and connect to it with SS
 
 `sudo docker ps`
 
-![GettingStartedResults.PNG](/Media/Container-GettingStartedResults.png)
+![Container-GettingStartedResults.png](Media/Container-GettingStartedResults.png)
 
 3. Connect to SQL Server in container using SSMS or SQL Ops Studio.
 
@@ -780,7 +780,7 @@ Open SSMS or Ops studio and connect to the SQL Server in container instance by c
 
 >Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
 
-![GettingStartedOpsStudio.PNG](/Media/Container-GettingStartedOpsStudio.png)
+![Container-GettingStartedOpsStudio.png](Media/Container-GettingStartedOpsStudio.png)
 
 3. Run SQLCMD inside the container. First run bash interactively in the container with docker execute 'bash' inside 'sql1' container. 
 
@@ -790,7 +790,7 @@ Use SQLCMD within the container to connect to SQL Server:
 
 /opt/mssql-tools/bin/sqlcmd -U SA -P 'YourStrong!Passw0rd'
 
-![sqlcmd.PNG](/Media/Container-ExecSQLCMD.png)
+![Container-ExecSQLCMD.png](Media/Container-ExecSQLCMD.png)
 
 Exit SQLCMD and the container with exit:
 
@@ -833,7 +833,7 @@ See that the container no longer exists:
 
 `sudo docker container ls`
 
-![DockerCommands.PNG](/Media/Container-DockerCommands.png)
+![Container-DockerCommands.png](Media/Container-DockerCommands.png)
 
 > **Key Takeaway**
 >
@@ -880,13 +880,13 @@ microsoft/mssql-server-linux:latest`
 
 `cat Dockerfile`
 
-![dockerfile.PNG](/Media/Container-Dockerfile.png)
+![Container-Dockerfile.png](Media/Container-Dockerfile.png)
 
 4. Run the following to build your container
 
 `sudo docker build . -t mssql-with-backup-example`
 
-![GettingStartedOpsStudio.PNG](/Media/Container-BuildOwnContainer.png)
+![Container-GettingStartedOpsStudio.png](Media/Container-GettingStartedOpsStudio.png)
 
 5. Start the container by running the following command after replacing `SA_PASSWORD` with your password
 
@@ -924,7 +924,7 @@ the output of this command should be similar to
 
 If you connect to the instance, you should see that the database was restored.
  
-![RestoredDB.PNG](/Media/Container-RestoredDB.png)
+![Container-RestoredDB.png](Media/Container-RestoredDB.png)
 
 7. Clean up the container
 
@@ -933,10 +933,8 @@ If you connect to the instance, you should see that the database was restored.
 
 > **Key Takeaway**
 >
-> A **Dockerfile** defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile behaves exactly the same wherever it runs.
->
-> -- https://docs.docker.com/get-started/part2/#your-new-development-environment
----
+> A **Dockerfile** defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile behaves exactly the same wherever it runs. 
+https://docs.docker.com/get-started/part2/#your-new-development-environment
 
  #### 4. Run a Containerized Application with SQL Server
  
@@ -968,13 +966,13 @@ Most applications involve multiple containers.
 
 3. Edit the `SA_PASSWORD` SQL Server environment variables then save the file with `ctrl + x`
 
-![DockerCompose.PNG](/Media/Container-DockerCompose.png)
+![Container-DockerCompose.png](Media/Container-DockerCompose.png)
 
 4. Edit the `-P` parameter in the `./mssql-aspcore-example-db/db-init.sh` file with the `SA_PASSWORD` that you used in the previous step 
 
 `nano ./mssql-aspcore-example-db/db-init.sh`
 
-![db-sh.PNG](/Media/Container-db-sh.png)
+![Container-db-sh.png](Media/Container-db-sh.png)
 
 4. Run the containers with docker-compose:
 
@@ -989,7 +987,7 @@ Most applications involve multiple containers.
 
 >Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Be sure to open up port 5000 based on this example.
 
-![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
+![Container-DockerComposeUp.png](Media/Container-DockerComposeUp.png)
 
 To stop the docker compose application, press `ctrl + c` in the terminal. 
 To remove the containers run the following command:
@@ -1013,6 +1011,4 @@ To remove the containers run the following command:
 
 > **Key Takeaway**
 >
-> **Compose** is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
->
-> --https://docs.docker.com/compose/overview/
+> **Compose** is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration. https://docs.docker.com/compose/overview/
