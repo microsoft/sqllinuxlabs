@@ -291,7 +291,7 @@ sudo docker-compose up
 ```
 http:<host IP>:5000
 ```
->Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
+>Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port) (be sure to open port 5000!)
 
 ![DockerComposeUp.PNG](/Media/Container-DockerComposeUp.png)
 
