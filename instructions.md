@@ -119,7 +119,7 @@ Note: Do not click on the hyperlinks in these instructions. Use these links to i
     - Run the MobaXterm_installer_10.7.msi to launch the installer
     - Accept all the defaults to complete the installation
 
-2. Install SQL Operations Studio (now called Azure Data Studio)) from either https://aka.ms/sqlopsstudio or https://aka.ms/getazuredatastudio
+2. Install SQL Operations Studio from https://aka.ms/sqlopsstudio
 
     - Choose the Installer Download from Windows.
     - Your browser will download the .exe file which is about 74Mb to your Downloads folder
