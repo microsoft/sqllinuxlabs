@@ -1,5 +1,17 @@
 # SQL Server on Linux and Containers Workshop
 
+This Workshop is divided into 3 labs:
+
+- Deploying SQL Server on Linux
+- Automatic Tuning for SQL Server on Linux
+- SQL Server with Docker Containers
+
+You must first go through the prelab which shows you how to setup a Linux VM in Azure.
+
+Your workshop is 75 minutes. There are many different aspects to this lab so you may not be able to complete every step in all labs in 75 minutes.
+
+After the prelab we recommend you go through the Deploy and Explore lab and then depending on how much time you have left, choose either the Automatic Tuning lab or the Docker lab. You may have time for all of them. Remember that these labs are available for you to go through on your own any time at https://github.com/Microsoft/sqllinuxlabs
+
 ## Prelab setup for SQL Server on Linux Labs
 
 This lab is required to setup your environment and tools to use the other labs. The workshop provides the necessary login and resources for:
@@ -94,7 +106,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
     ![Copyconnectionsshstring.PNG](Media/Copyconnectionsshstring.PNG)
 
-### Installing tools on your client
+### Installing tools and scripts on your client
 
 **Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to install and use any ssh client you like in the Windows 10 virtual machine.
 
@@ -107,11 +119,11 @@ Note: Do not click on the hyperlinks in these instructions. Use these links to i
     - Run the MobaXterm_installer_10.7.msi to launch the installer
     - Accept all the defaults to complete the installation
 
-2. Install SQL Operations Studio from <https://docs.microsoft.com/sql/sql-operations-studio/download>
+2. Install SQL Operations Studio (now called Azure Data Studio)) from <https://docs.microsoft.com/sql/sql-operations-studio/download>
 
     - Choose the Installer Download from Windows.
     - Your browser will download the .exe file which is about 74Mb to your Downloads folder
-    - Please make sure you are running at minimum the June 2018 Preview version of SQL Server Operations Studio. If you select the Help/About menu in the tool, your version should look something like the following
+    - Please make sure you are running at minimum the June 2018 Preview version of SQL Server Operations Studio. If you select the Help/About menu in the tool, your version should look something like the following (or later version)
 
         ![sqlopstudioversion.png](Media/sqlopstudioversion.png)
 
@@ -126,6 +138,10 @@ Please make sure you are running at minimum version 17.7
 You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
 
 ![ssmsversion.png](Media/ssmsversion.png)
+
+4. Download all the scripts for the labs to your Windows client machine by going to this webpage https://github.com/Microsoft/sqllinuxlabs and selecting the "Clone or download" button (Green button). Select Download ZIP. Find this zip file in your Downloads folder and extract these files to a location on your local drive. An alternative is to use the git command line tool by running this command from a Windows command prompt
+
+    `git clone https://github.com/Microsoft/sqllinuxlabs`
 
 ### Connecting to your Linux VM with ssh
 
@@ -502,6 +518,12 @@ Now you will learn the great compatibility story of SQL Server on Linux by resto
 2. Copy and restore the WideWorldImporters database. Copy the **cpwwi.sh**, **restorewwi.sh**, and **restorewwi_linux.sql** files from the downloaded zip of the gitHub repo into your home directory on Linux. MobaXterm provides drag and drop capabilities to do this. Copy these files and drop them into the "explorer" pane in MobaXterm on the left hand side from your ssh session.
 
     Note: You can skip this step if you have already cloned the git repo in the prelab. If you have done this, the scripts in this lab are in the **sqllinuxlab** subdirectory. You can copy them into your home directory or edit them to ensure you have the right path for the WideWorldImporters backup file.
+
+    If you decide to copy these to your home directory use the following commands
+
+    `cp sqllinuxlabs/deploy_and_explore/cpwwi.sh ~`
+    `cp sqllinuxlabs/deploy_and_explore/restorewwi.sh ~`
+    `cp sqllinuxlabs/deploy_and_explore/restorewwi_linux.sql ~`
 
 3. Run the following commands from the bash shell to make the scripts executable (supply the root password if prompted)
 
