@@ -91,7 +91,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 Download all the scripts by running this command from a Windows command prompt
 
-    `git clone https://github.com/Microsoft/sqllinuxlabs`
+ git clone https://github.com/Microsoft/sqllinuxlabs
 
 ### Connecting to your Linux VM with ssh
 
