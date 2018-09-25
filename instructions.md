@@ -17,14 +17,18 @@ After the prelab we recommend you go through the Deploy and Explore lab and then
 This lab is required to setup your environment and tools to use the other labs. The workshop provides the necessary login and resources for:
 
 - An Azure login so you provision an Azure Virtual Machine running Linux.
-- A virtual machine running Windows 10 to install client tools and use them to interact with the Azure Virtual Machine and SQL Server.
+- A virtual machine running Windows 10 use client tools and use them to interact with the Azure Virtual Machine and SQL Server.
 
-The Resource tab on this lab page has login information for both Azure and the Windows 10 Virtual Machine.
+The Resource tab on this lab page has login information for both Azure and the Windows 10 Virtual Machine. Your Windows 10 Virtual Machine comes pre-installed with these tools you will use in the labs:
+
+- Mobaxterm to interact with the Linux VM via ssh
+- SQL Operations Studio
+- SQL Server Management Studio
 
 The prelab is divided into four sections:
 
 - Deploying an Azure Virtual Machine running Linux
-- Installing tools on your client
+- Installing scripts on your client
 - Connecting to the Linux VM with ssh
 - Installing Updates and Docker for Linux
 
@@ -32,9 +36,9 @@ The prelab is divided into four sections:
 
 For this first step in the prelab, you will learn how to deploy an Azure Virtual Machine running Red Hat Enterprise Linux. You will not install SQL Server during this prelab. You will do this in the first lab called **deploy_and_explore**.
 
-1. Login into the Azure portal using the Resources tab. A new window will come up and prompt you to put in account information. If necessary choose "Use another account". Copy and paste the Username and Password when prompted for an eamil and password. You will placed into the Azure portal (Select Maybe later to skip the Azure Tour).
+1. Login to the Windows 10 machine and bring up the Azure portal at http://portal.azure.com. You will be prompted for Azure account information. Use the Resources tab from the lab page to auto type the Azure account and password.
 
-2. Click on **+ Create a resource**
+2. From the Azure portal, Click on **+ Create a resource**
 
 3. Type in "Red Hat Enterprise Linux" in the Search Window and hit Enter. Your results should look something like this
 
@@ -44,53 +48,28 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 5. Click on the **Create** button at the bottom of the screen
 
-**Note: The user interface in the Azure Portal to create a Virtual Machine is changing soon so the interface may be slightly different. You should be able to read these instructions for what fields to use and fill out for any new interface changes.**
-
-6. Fill out the following fields on the Basics blade
-    - Fill in the Name field with a unique hostname
-    - Leave VM disk type set to SSD
-    - Type in a Username
-    - Choose Authentication Type of Password
+6. Fill out the following fields on the Basics tab (leave all other fields as defaults)
+    - Virtual machine name
+    - Select Password as Authentication type
+    - Type in a username
     - Type in and Confirm a password that meets requirements. **IMPORTANT: This password will be used to login to the Linux VM. It is the root password which you will use with the sudo command in the labs. So secure and save this password.**
-    - Leave AAD Disabled
-    - Choose your Subscription
-    - Use the existing resource group provided
-    - Choose a location for your VM (The default is East US which should work fine for this lab)
-    - Click on OK
+    - Select 'Allow inbound ports'
+    - Select SSH (22)
+    - Click Review + create
 
-        ![rhelvmbasics.png](Media/rhelvmbasics.png)
-
-7. Choose a size for your VM
-    - For purposes of these labs, we recommend a minimum of 4 vCPUs and 16GB RAM. You should not need more than 8vCPUs and 32GB RAM to complete these labs for your VM.
-
-    - Click on **Select** when you have chosen your size.
-
-8. Fill out the following fields on the Settings blade
-    - Leave Availability zone set to None
-    - Leave Managed Disks set to Yes
-    - Leave all Network fields set to default
-    - Leave Network Security Group set to Basic
-    - Select SSH (22) for public inbound ports
-    - Leave all other fields with default settings
-    - Click OK
-
-        ![rhelvmsettings.png](Media/rhelvmsettings.png)
-
-9. You will be presented with a new blade ready to create the VM. Click the **Create** button at the bottom of the blade
-
-10. Your VM will now be deployed. You can click the Notifications icon at the top of the portal screen to see the deployment in progress. The typical time to create a virtual machine in Azure for Red Hat is about 5-10 minutes.
+7. Your VM will now be deployed. You can click the Notifications icon at the top of the portal screen to see the deployment in progress. The typical time to create a virtual machine in Azure for Red Hat is about 5-10 minutes.
 
     ![AzurePortalNotifications.png](Media/AzurePortalNotifications.png)
 
-11. On the successful deployment screen, I recommend you select **Pin to Dashboard**
+8. On the successful deployment screen, I recommend you select **Pin to Dashboard**
 
     ![AzureDeploymentSucceeded.PNG](Media/AzureDeploymentSucceeded.PNG)
 
-12. Now click on **Go to Resource** button and select X in the corner of this Notifications screen to remove it.
+9. Now click on **Go to Resource** button and select X in the corner of this Notifications screen to remove it.
 
     ![VMResourcePage.PNG](Media/VMResourcePage.PNG)
 
-13. Configure a DNS name to make it easier to connect
+10. Configure a DNS name to make it easier to connect
     - On the resource page, click on **Configure** under **DNS name**
     - Type in a DNS name label. I typically just use the hostname when I created the VM
     - Click the Save button at the top of the screen. This should only take a few seconds
@@ -98,54 +77,23 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
         ![AzureVMDNSname.PNG](Media/AzureVMDNSname.PNG)
 
-14. Your resources page should now show the DNS name you created (you may need to select Refresh).
+11. Your resources page should now show the DNS name you created (you may need to select Refresh).
 
-15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
+12. We need to open up some ports in the Azure VM for the rest of the labs. Click on Add Inbound Port rule. Put in 1433 for Destination Port ranges and click the Add button. Do the same steps to add rules for port 1500 and 5000 (you will add 3 separate rules).
 
-16. Under Login using VM local account click on the **Copy** icon to grab the connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to use in the next section. I call this the **Linux Login**
+13. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
+
+14. Under Login using VM local account click on the **Copy** icon to grab the connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to use in the next section. I call this the **Linux Login**
 
     ![Copyconnectionsshstring.PNG](Media/Copyconnectionsshstring.PNG)
 
-### Installing tools and scripts on your client
+### Installing scripts on your Windows client
 
-**Note: The first step of this part of the lab is install software to be able to connect with ssh to your Linux Server. This lab instructs you how to use the popular tool MobaXterm. You are free to install and use any ssh client you like in the Windows 10 virtual machine.
-
-Note: Do not click on the hyperlinks in these instructions. Use these links to install the client software in the Windows 10 virtual machine.
-
-1. Login to the Windows 10 Virtual Machine. the Username and Password are in the Resources tabl. You can use click on the "T" to autofill the password on the Login screen for Windows 10. Once logged in, install the MobaXterm client application from <https://mobaxterm.mobatek.net/download-home-edition.html>
-
-    - Choose the Installer Edition which in your browser will download a file called MobaXterm_Installer_v10.7.zip to your Downloads folder
-    - Extract all the files from the zip file
-    - Run the MobaXterm_installer_10.7.msi to launch the installer
-    - Accept all the defaults to complete the installation
-
-2. Install SQL Operations Studio from https://aka.ms/sqlopsstudio
-
-    - Choose the Installer Download from Windows.
-    - Your browser will download the .exe file which is about 74Mb to your Downloads folder
-    - Please make sure you are running at minimum the June 2018 Preview version of SQL Server Operations Studio. If you select the Help/About menu in the tool, your version should look something like the following (or later version)
-
-        ![sqlopstudioversion.png](Media/sqlopstudioversion.png)
-
-3. Install the latest SQL Server Management Studio (SSMS) from <https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms>
-
-Note: If you are pressed for time, installing SSMS is optional and can be skipped. There are labs to use SSMS to connect to SQL Server on Linux but they are not the core aspect to these labs.
-
-If you have never installed SSMS before, choose the option "Download SQL Server Management Studio 17.X"
-
-Please make sure you are running at minimum version 17.7
-
-You can check your version by selecting the Help/About menu in the tool. Here is the following screenshot for Version 17.7
-
-![ssmsversion.png](Media/ssmsversion.png)
-
-4. Download all the scripts for the labs to your Windows client machine by going to this webpage https://github.com/Microsoft/sqllinuxlabs and selecting the "Clone or download" button (Green button). Select Download ZIP. Find this zip file in your Downloads folder and extract these files to a location on your local drive. An alternative is to use the git command line tool by running this command from a Windows command prompt
+Download all the scripts by running this command from a Windows command prompt
 
     `git clone https://github.com/Microsoft/sqllinuxlabs`
 
 ### Connecting to your Linux VM with ssh
-
-`Note`: If you have any issues connecting with ssh to your Azure VM, be sure to have installed the latest version of your ssh client such as MobaXterm (<https://mobaxterm.mobatek.net/download.html>), Bitvise (<https://www.bitvise.com>), or whatever ssh client you are using on Windows.
 
 You will need the **Linux Login** and the password you saved from the Azure VM Deployment section above in the prelab.
 
@@ -155,6 +103,8 @@ You will need the **Linux Login** and the password you saved from the Azure VM D
 4. Put in the Remote Host field the **Linux Login** and click OK. The following screenshot shows an example
 
     ![mobaxtermconnect.png](Media/mobaxtermconnect.png)
+
+    NOTE: Remove the "ssh " from the connection you copie from the Azure portal.
 
 5. When prompted type in the password you used when deploying the Azure VM
 6. You may get prompted to save the password. I recommend you click Yes
@@ -258,11 +208,7 @@ Run all of the following commands from your ssh session with the bash shell. Thi
 
     `sudo firewall-cmd --reload`
 
-5. Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1433 to external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Use port 1433 when using this example.
-
 Believe it or not, that's it! You have now installed SQL Server on Linux which includes the core database engine and SQL Server Agent.
-
-
 
 ### Explore the SQL Server installation
 
@@ -803,8 +749,6 @@ Open SSMS or Ops studio and connect to the SQL Server in container instance by c
 
 `<host IP>, 1500`
 
->Note: If you are running this in an Azure VM, the host IP is the public Azure VM IP. You will also need to open port 1500 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port)
-
 ![Container-GettingStartedOpsStudio.png](Media/Container-GettingStartedOpsStudio.png)
 
 3. Run SQLCMD inside the container. First run bash interactively in the container with docker execute 'bash' inside 'sql1' container. 
@@ -1007,8 +951,6 @@ Most applications involve multiple containers.
 5. At this point, you will have two containers up and running: an application container that is able to query the database container. Connect to the 
 
 `http:<host IP>:5000`
-
->Note: If you are running this in an Azure VM, the host IP is the Azure VM Public IP. You will also need to open port 5000 external traffic. [go here to learn how to open ports in Azure VMs](/open_azure_vm_port). Be sure to open up port 5000 based on this example.
 
 ![Container-DockerComposeUp.png](Media/Container-DockerComposeUp.png)
 
