@@ -114,10 +114,6 @@ You will need the **Linux Login** and the password you saved from the Azure VM D
 
 ### Installing Updates and Docker for Linux
 
-Note: Remove any previous installations of Docker from your RHEL image by executing the following command
-
-`sudo yum remove docker docker-common docker-selinux docker-engine`
-
 1. From your ssh prompt, update all existing packages and applications by running this command (enter the password you used to connect with ssh when prompted). This could take several minutes to update.
 
     `sudo yum -y update`
@@ -686,44 +682,12 @@ You have seen that by default if Query Store is enabled, SQL Server can pinpoint
 
 ## SQL Server Containers Lab
 
-### Pre Lab
-1. Install docker engine by running the following:
+### 1. Getting started with SQL Server in Containers
 
-`sudo yum install -y yum-utils device-mapper-persistent-data lvm2`
-
-`sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
-
-`sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/pigz-2.3.3-1.el7.centos.x86_64.rpm`
-
-`sudo yum install docker-ce`
-
-check status of docker engine:
-
-`sudo systemctl status docker`
-
-if is not running, start it by running:
-
-`sudo systemctl start docker`
-
->Note: for this lab, we are installing docker for CentOS, this will work on CentOS or RHEL due to the similarity of the OS’s. For production usage on RHEL, install Docker EE for RHEL: https://docs.docker.com/install/linux/docker-ee/rhel/.
- 
-2. clone this repo by running the following:
-
-    Note: If you have already done this in the prelab you can skip this step
-
-
-`sudo yum install git`
-`git clone https://github.com/Microsoft/sqllinuxlabs.git`
-
----
-
-### Lab
-#### 1. Getting started with SQL Server in Containers
-
-##### Introduction
+#### Introduction
 In this section you will run SQL Server in a container and connect to it with SSMS/SQL Operations Studio. This is the easiest way to get started with SQL Server in containers.  
  
-##### Steps
+#### Steps
 1. Change the `SA_PASSWORD` in the command below and run it in your terminal:
  
 
@@ -771,11 +735,11 @@ Exit SQLCMD and the container with exit:
  
 ---
 
-#### 2. Explore Docker Basics
-##### Introduction
+### 2. Explore Docker Basics
+#### Introduction
  In this section you'll learn the basics of how to navigate container images and active containers on your host.
 
-##### Steps
+#### Steps
 Enter the following commands in your terminal.
 
 See the active container instances:
@@ -814,9 +778,9 @@ See that the container no longer exists:
  
 ---
 
-#### 3.  Build your own container 
+### 3.  Build your own container 
 
-##### Introduction:
+#### Introduction:
 In the past, if you were to set up a new SQL Server environment or dev test, your first order of business was to install a SQL Server onto your machine. But, that creates a situation where the environment on your machine might not match test/production.
 
 With Docker, you can get SQL Server as an image, no installation necessary. Then, your build can include the base SQL Server image right alongside any additional environment needs, ensuring that your SQL Server instance, its dependencies, and the runtime, all travel together.
@@ -905,11 +869,11 @@ If you connect to the instance, you should see that the database was restored.
 > A **Dockerfile** defines what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you need to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile behaves exactly the same wherever it runs. 
 https://docs.docker.com/get-started/part2/#your-new-development-environment
 
-#### 4. Run a Containerized Application with SQL Server
+### 4. Run a Containerized Application with SQL Server
  
 Most applications involve multiple containers. 
 
-##### Steps
+#### Steps
 
 1. Install docker-compose:
 
@@ -961,7 +925,7 @@ To remove the containers run the following command:
 `sudo docker-compose down`
 
 
-##### Start-up Explanation
+#### Start-up Explanation
 
 1. Running `docker-compose up` builds/pulls containers and run them with parameters defined in docker-compose.yml
 2. The .Net Core application container starts up  
