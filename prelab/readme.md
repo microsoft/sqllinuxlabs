@@ -51,7 +51,7 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
     - Leave Managed Disks set to Yes
     - Leave all Network fields set to default
     - Leave Network Security Group set to Basic
-    - Select SSH (22) and MS SQL (1433) for public inbound ports
+    - Select SSH (22) for public inbound ports (You will need to configure the MSSQL port after the Network Security Group has been created)
     - Note: You are exposing your VM and SQL Server to a public port. To provide less exposure you can configure your VM after it is deployed to only allow specific IP addresses from your client computer to access the VM or SQL Server. Or if you choose to use an Azure VM as a client you do not have to choose this option provided you have setup your Azure VM as a client to access the Linux VM (such as placing the client Azure VM in the same virtual network)
     - Leave all other fields with default settings
     - Click OK
@@ -82,9 +82,15 @@ For this first step in the prelab, you will learn how to deploy an Azure Virtual
 
 14. Your resources page should now show the DNS name you created
 
-15. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
+15. Configure public inbound access to port 1433
+    - On the Resource Group page, select the RG that was used (or created) for the Linux server
+    - Select the Network Security Group. This should be named `<server-name>-nsg`
+    - Select "inbound security rules"
+    - Click "Add" and create a new rule to define a source of "ANY", a destination of "ANY", a port of "1443", and a priority of "310". Name this rule "MSSQL"
 
-16. Under Login using VM local account click on the **Copy** icon to grab the connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to use in the next section. I call this the **Linux Login**
+16. Click on the **Connect** icon on the top of the resources page to capture how to connect to this VM with ssh
+
+17. Under Login using VM local account click on the **Copy** icon to grab the connection syntax to connect to this VM with ssh. The information you need is everything after the word ssh. For example, for `ssh thewandog@bwsqllabs.westus.cloudapp.azure.com` you will just need `thewandog@bwsqllabs.westus.cloudapp.azure.com`. Save this information to use in the next section. I call this the **Linux Login**
 
     ![Copyconnectionsshstring.PNG](../Media/Copyconnectionsshstring.PNG)
 
@@ -163,6 +169,11 @@ check status of docker engine:
 ```
 sudo systemctl status docker
  ```
+
+enable the service to start on system boot:
+```
+sudo systemctl enable docker
+```
 
 if is not running, start it by running:
 ``` 
