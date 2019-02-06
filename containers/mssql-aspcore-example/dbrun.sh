@@ -1,1 +1,0 @@
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=1234qwerASDF" -p 1500:1433 --name sql1 -d tigervin/mssql-aspcore-example-db
