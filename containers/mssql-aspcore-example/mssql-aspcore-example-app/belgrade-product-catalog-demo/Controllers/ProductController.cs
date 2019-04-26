@@ -38,7 +38,7 @@ namespace ProductCatalog.Controllers
                         throw ex;
                     })
                 .Stream(@"
-            select  ProductID, Name, Color, Price, Quantity,
+            select  ProductID, Name, Color, Price, Quantity, @@version as Version,
                     JSON_VALUE(Data, '$.MadeIn') as MadeIn, JSON_QUERY(Tags) as Tags
             from Product
             FOR JSON PATH, ROOT('data')", Response.Body, EMPTY_PRODUCTS_ARRAY);
@@ -64,7 +64,7 @@ select COMPRESS(
         public async Task Get(int id)
         {
             var cmd = new SqlCommand(
-@"select    ProductID, Product.Name, Color, Price, Quantity,
+@"select    ProductID, Product.Name, Color, Price, Quantity, @@VERSION as Version,
             Company.Name as Company, Company.Address, Company.Email, Company.Phone 
 from Product
     join Company on Product.CompanyID = Company.CompanyID

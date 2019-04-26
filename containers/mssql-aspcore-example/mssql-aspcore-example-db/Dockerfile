@@ -1,4 +1,4 @@
-FROM microsoft/mssql-server-linux:latest
+FROM mcr.microsoft.com/mssql/rhel/server:2019-CTP2.2
 
 COPY . /
 

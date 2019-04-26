@@ -22,6 +22,9 @@ namespace ProductCatalog.Models
         public int Quantity { get; set; }
 
         public int CompanyID { get; set; }
+        
+        [NotMapped]
+        public string Version { get; set; }
 
         [NotMapped]
         public string[] Tags

@@ -10,6 +10,7 @@ $(document).ready(function () {
             { "data": "Color", "defaultContent": "" },
             { "data": "Price", sType: 'numeric', "defaultContent": "" },
             { "data": "Quantity", "visible": true, "defaultContent": "" },
+            { "data": "Version"},
             { "data": "MadeIn", "visible": true, "defaultContent": "" },
             { "data": "Tags", "visible": true, "defaultContent": "" },
             {

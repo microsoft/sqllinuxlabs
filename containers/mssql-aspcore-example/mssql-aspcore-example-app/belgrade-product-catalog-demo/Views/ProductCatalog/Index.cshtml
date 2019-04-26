@@ -70,6 +70,7 @@
         </div>
     </div>
     <!-- End Bootstrap modal -->
+
     <!-- JQuery DataTable -->
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
@@ -79,6 +80,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Made in</th>
+                <th>Version</th>
                 <th>Tags</th>
             </tr>
         </thead>
@@ -90,6 +92,7 @@
                     <td>@product.Color</td>
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
+                    <td>@product.Version</td>
                     <td>@(product.Data == null ? string.Empty : product.Data.MadeIn)</td>
                     <td>@(product.Tags==null ? string.Empty : string.Join(", ", product.Tags))</td>
                 </tr>
