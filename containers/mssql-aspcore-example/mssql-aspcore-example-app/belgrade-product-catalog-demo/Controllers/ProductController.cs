@@ -38,7 +38,7 @@ namespace ProductCatalog.Controllers
                         throw ex;
                     })
                 .Stream(@"
-            select  ProductID, Name, Color, Price, Quantity, @@version as Version,
+            select  ProductID, Name, Color, Price, Quantity, SERVERPROPERTY('ProductLevel') as Version, SERVERPROPERTY('MachineName')AS[ServerName], 
                     JSON_VALUE(Data, '$.MadeIn') as MadeIn, JSON_QUERY(Tags) as Tags
             from Product
             FOR JSON PATH, ROOT('data')", Response.Body, EMPTY_PRODUCTS_ARRAY);

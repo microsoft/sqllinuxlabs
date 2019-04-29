@@ -27,6 +27,9 @@ namespace ProductCatalog.Models
         public string Version { get; set; }
 
         [NotMapped]
+        public string ServerName { get; set; }
+
+        [NotMapped]
         public string[] Tags
         {
             get { return _Tags == null ? null : JsonConvert.DeserializeObject<string[]>(_Tags); }

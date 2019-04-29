@@ -42,6 +42,7 @@ $(document).ready(function () {
         ]
     });// end DataTable setup
 
+    $.fn.dataTable.ext.errMode = 'none';
 });
 
 $(function () {
