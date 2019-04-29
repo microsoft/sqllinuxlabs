@@ -32,7 +32,8 @@ namespace ProductCatalog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string ConnString = Configuration["ConnectionStrings:BelgradeDemo"];
+            string hostname = Environment.GetEnvironmentVariable("db-hostname");
+            string ConnString = $"Server={hostname};Database=ProductCatalog;User ID=sa; password=Yukon900";
 
             services.AddDbContext<ProductCatalogContext>(options => options.UseSqlServer(new SqlConnection(ConnString)));
 
