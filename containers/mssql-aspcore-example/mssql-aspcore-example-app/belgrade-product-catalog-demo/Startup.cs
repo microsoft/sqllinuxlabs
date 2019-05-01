@@ -33,7 +33,7 @@ namespace ProductCatalog
         public void ConfigureServices(IServiceCollection services)
         {
             string hostname = Environment.GetEnvironmentVariable("db-hostname");
-            string ConnString = $"Server={hostname};Database=ProductCatalog;User ID=sa; password=Yukon900";
+            string ConnString = $"Server={hostname};Database=ProductCatalog;User ID=sa; password=Yukon900; Connection Timeout=2;";
 
             services.AddDbContext<ProductCatalogContext>(options => options.UseSqlServer(new SqlConnection(ConnString)));
 

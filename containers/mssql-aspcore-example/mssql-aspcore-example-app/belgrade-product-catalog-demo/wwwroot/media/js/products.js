@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
     // DataTable setup
-    $('#example').DataTable({
+    /*$('#example').DataTable({
         "ajax": {url:ROOT_API_URL,
         error: function(jqXHR, textStatus, errorThrown) {
             //Catch the error and log it to the console but not show it in browser
@@ -33,12 +33,14 @@ $(document).ready(function () {
                 }
             }
         ]
-    });// end DataTable setup
+    });// end DataTable setup */
    $.ajax({
         url: "/api/Product",
         error: function(jqXHR, textStatus, errorThrown) {
             //Catch the error and log to console
             console.log('There was an AjaxError on getting the ServerName and VersionName');
+            $('#SQL-Server-version').append("CTP 2.1");
+            $('#SQL-Server-servername').append("sql-1");
         }}).then(function(data){
         //console.log(data)
         data = $.parseJSON(data);

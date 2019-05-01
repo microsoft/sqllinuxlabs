@@ -13,7 +13,9 @@
     <link href="media/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="media/css/toastr.min.css" rel="stylesheet" />
     <link href="media/css/products.css" rel="stylesheet" />
-    
+    <script>
+            var test= "test1";
+    </script>        
     <script src="media/js/lib/jquery.js"></script>
     <script src="media/js/lib/jquery-ui.js"></script>
     <script src="media/js/lib/Bootstrap.js"></script>
@@ -38,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/ProductCatalog/Index">Product Catalog Demo</a>
+                <a class="navbar-brand">Product Catalog</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -190,24 +192,515 @@
             </div>
         </div>
         <!-- End Bootstrap modal -->
+                    <script>
+             $(document).ready(function() { 
+                $('#wrapper1').show();
+                $('#wrapper2').show();
+                $('#wrapper3').show();
+                $('#wrapper4').show();
+                var context = $(".UserGreeting").text();
 
-            <!-- JQuery DataTable -->
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                console.log(context);
+                if (context == "Admin" ){
+                    $('#wrapper2').hide();
+                    $('#wrapper3').hide();
+                    $('#wrapper4').hide();
+                    $('#wrapper1').show();
+                }
+                else if (context == "Consolidated Messenger" ){
+                    $('#wrapper4').show();
+                    $('#wrapper3').hide();
+                    $('#wrapper2').hide();
+                    $('#wrapper1').hide();
+                    console.log("1");
+                }
+                else if (context == "Contoso, Ltd." ){
+                    $('#wrapper3').show();
+                    $('#wrapper2').hide();
+                    $('#wrapper1').hide();
+                    $('#wrapper4').hide();
+                    console.log("2");
+                }
+                else{
+                    console.log("3");
+                    $('#wrapper1').hide();
+                    $('#wrapper3').hide();
+                    $('#wrapper4').hide();
+                    $('#wrapper2').show();
+                }
+             });
+           </script>
+
+<div id = "wrapper1">
+           
+<div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+           <div class="col-sm-12">
+              <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                 <thead>
+                    <tr role="row">
+                       <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Product: activate to sort column descending" style="width: 200px;" aria-sort="ascending">Product</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Color: activate to sort column ascending" style="width: 52px;">Color</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 49px;">Price</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 76px;">Quantity</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Made in: activate to sort column ascending" style="width: 73px;">Made in</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Tags: activate to sort column ascending" style="width: 74px;">Tags</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Edit" style="width: 52px;">Edit</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Delete" style="width: 69px;">Delete</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Adjustable Race</td>
+                       <td>Magenta</td>
+                       <td>100</td>
+                       <td>75</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="15" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="15" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">BB Ball Bearing</td>
+                       <td>Magenta</td>
+                       <td>37.99</td>
+                       <td>90</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="17" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="17" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Bearing Ball</td>
+                       <td>Magenta</td>
+                       <td>15.99</td>
+                       <td>90</td>
+                       <td>China</td>
+                       <td>promo</td>
+                       <td><button data-id="16" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="16" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Blade</td>
+                       <td>Silver</td>
+                       <td>18</td>
+                       <td>45</td>
+                       <td></td>
+                       <td>new</td>
+                       <td><button data-id="18" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="18" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">HL Bottom Bracket</td>
+                       <td>Silver</td>
+                       <td>121.49</td>
+                       <td>65</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="28" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="28" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Long-Sleeve Logo Jersey, XL</td>
+                       <td>White</td>
+                       <td>44.99</td>
+                       <td>60</td>
+                       <td></td>
+                       <td>sales,promo</td>
+                       <td><button data-id="23" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="23" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">ML Bottom Bracket</td>
+                       <td>Silver</td>
+                       <td>101.24</td>
+                       <td>50</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="27" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="27" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Mountain Bike Socks, L</td>
+                       <td>White</td>
+                       <td>120.99</td>
+                       <td>20</td>
+                       <td></td>
+                       <td>sales,promo</td>
+                       <td><button data-id="22" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="22" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Mountain Bike Socks, M</td>
+                       <td>White</td>
+                       <td>560.99</td>
+                       <td>30</td>
+                       <td></td>
+                       <td>sales,promo</td>
+                       <td><button data-id="21" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="21" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Mountain-100 Silver, 38</td>
+                       <td>White</td>
+                       <td>359.99</td>
+                       <td>45</td>
+                       <td>UK</td>
+                       <td>promo</td>
+                       <td><button data-id="25" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="25" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Road-250 Black, 48</td>
+                       <td>Black</td>
+                       <td>299.02</td>
+                       <td>25</td>
+                       <td>UK</td>
+                       <td>new,promo</td>
+                       <td><button data-id="26" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="26" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Road-650 Black, 52</td>
+                       <td>Black</td>
+                       <td>704.69</td>
+                       <td>70</td>
+                       <td>UK</td>
+                       <td></td>
+                       <td><button data-id="24" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="24" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Sport-100 Helmet, Black</td>
+                       <td>Black</td>
+                       <td>31.49</td>
+                       <td>60</td>
+                       <td>China</td>
+                       <td>new,promo</td>
+                       <td><button data-id="20" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="20" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Sport-100 Helmet, Red</td>
+                       <td>Black</td>
+                       <td>41.99</td>
+                       <td>38</td>
+                       <td>China</td>
+                       <td>promo</td>
+                       <td><button data-id="19" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="19" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+        </div>
+</div>
+</div>
+
+<div id = "wrapper2">
+
+<div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                 <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Color</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Made in</th>
-                        <th>Tags</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Product: activate to sort column descending" style="width: 200px;" aria-sort="ascending">Product</th>
+                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Color: activate to sort column ascending" style="width: 52px;">Color</th>
+                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 49px;">Price</th>
+                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 76px;">Quantity</th>
+                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Made in: activate to sort column ascending" style="width: 73px;">Made in</th>
+                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Tags: activate to sort column ascending" style="width: 74px;">Tags</th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Edit" style="width: 52px;">Edit</th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Delete" style="width: 69px;">Delete</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <tr role="row" class="odd">
+                        <td class="sorting_1">Adjustable Race</td>
+                        <td>Magenta</td>
+                        <td>100</td>
+                        <td>75</td>
+                        <td>China</td>
+                        <td></td>
+                        <td>
+                            <button data-id="15" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="15" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                    <tr role="row" class="even">
+                        <td class="sorting_1">Blade</td>
+                        <td>Silver</td>
+                        <td>18</td>
+                        <td>45</td>
+                        <td></td>
+                        <td>new</td>
+                        <td>
+                            <button data-id="18" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="18" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                    <tr role="row" class="odd">
+                        <td class="sorting_1">Long-Sleeve Logo Jersey, XL</td>
+                        <td>White</td>
+                        <td>44.99</td>
+                        <td>60</td>
+                        <td></td>
+                        <td>sales,promo</td>
+                        <td>
+                            <button data-id="23" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="23" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                    <tr role="row" class="even">
+                        <td class="sorting_1">Mountain-100 Silver, 38</td>
+                        <td>White</td>
+                        <td>359.99</td>
+                        <td>45</td>
+                        <td>UK</td>
+                        <td>promo</td>
+                        <td>
+                            <button data-id="25" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="25" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                    <tr role="row" class="odd">
+                        <td class="sorting_1">Road-650 Black, 52</td>
+                        <td>Black</td>
+                        <td>704.69</td>
+                        <td>70</td>
+                        <td>UK</td>
+                        <td></td>
+                        <td>
+                            <button data-id="24" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="24" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                    <tr role="row" class="even">
+                        <td class="sorting_1">Sport-100 Helmet, Black</td>
+                        <td>Black</td>
+                        <td>31.49</td>
+                        <td>60</td>
+                        <td>China</td>
+                        <td>new,promo</td>
+                        <td>
+                            <button data-id="20" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        </td>
+                        <td>
+                            <button data-id="20" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-            <!-- End JQuery DataTable -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 6 of 6 entries</div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0">Previous</a></li>
+                    <li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
+                    <li class="paginate_button next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id = "wrapper3">
+
+<div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+           <div class="col-sm-12">
+              <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                 <thead>
+                    <tr role="row">
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style="width: 172px;">Product</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Color: activate to sort column ascending" style="width: 55px;">Color</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 53px;">Price</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 81px;">Quantity</th>
+                       <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Made in: activate to sort column descending" style="width: 77px;" aria-sort="ascending">Made in</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Tags: activate to sort column ascending" style="width: 78px;">Tags</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Edit" style="width: 56px;">Edit</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Delete" style="width: 73px;">Delete</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr role="row" class="odd">
+                       <td class="">Mountain Bike Socks, M</td>
+                       <td>White</td>
+                       <td>560.99</td>
+                       <td>30</td>
+                       <td class="sorting_1"></td>
+                       <td>sales,promo</td>
+                       <td><button data-id="21" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="21" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="">Bearing Ball</td>
+                       <td>Magenta</td>
+                       <td>15.99</td>
+                       <td>90</td>
+                       <td class="sorting_1">China</td>
+                       <td>promo</td>
+                       <td><button data-id="16" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="16" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="">HL Bottom Bracket</td>
+                       <td>Silver</td>
+                       <td>121.49</td>
+                       <td>65</td>
+                       <td class="sorting_1">China</td>
+                       <td></td>
+                       <td><button data-id="28" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="28" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="">Road-250 Black, 48</td>
+                       <td>Black</td>
+                       <td>299.02</td>
+                       <td>25</td>
+                       <td class="sorting_1">UK</td>
+                       <td>new,promo</td>
+                       <td><button data-id="26" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="26" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-5">
+              <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries</div>
+           </div>
+           <div class="col-sm-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                 <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0">Previous</a></li>
+                    <li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
+                    <li class="paginate_button next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">Next</a></li>
+                 </ul>
+              </div>
+           </div>
+        </div>
+ </div>   
+</div>
+
+<div id = "wrapper4">
+
+ <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+           <div class="col-sm-6">
+              <div class="dataTables_length" id="example_length">
+                 <label>
+                    Show 
+                    <select name="example_length" aria-controls="example" class="form-control input-sm">
+                       <option value="10">10</option>
+                       <option value="25">25</option>
+                       <option value="50">50</option>
+                       <option value="100">100</option>
+                    </select>
+                    entries
+                 </label>
+              </div>
+           </div>
+           <div class="col-sm-6">
+              <div id="example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-12">
+              <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                 <thead>
+                    <tr role="row">
+                       <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Product: activate to sort column descending" style="width: 168px;" aria-sort="ascending">Product</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Color: activate to sort column ascending" style="width: 56px;">Color</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 53px;">Price</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 81px;">Quantity</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Made in: activate to sort column ascending" style="width: 78px;">Made in</th>
+                       <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Tags: activate to sort column ascending" style="width: 79px;">Tags</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Edit" style="width: 56px;">Edit</th>
+                       <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Delete" style="width: 74px;">Delete</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">BB Ball Bearing</td>
+                       <td>Magenta</td>
+                       <td>37.99</td>
+                       <td>90</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="17" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="17" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">ML Bottom Bracket</td>
+                       <td>Silver</td>
+                       <td>101.24</td>
+                       <td>50</td>
+                       <td>China</td>
+                       <td></td>
+                       <td><button data-id="27" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="27" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                       <td class="sorting_1">Mountain Bike Socks, L</td>
+                       <td>White</td>
+                       <td>120.99</td>
+                       <td>20</td>
+                       <td></td>
+                       <td>sales,promo</td>
+                       <td><button data-id="22" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="22" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                    <tr role="row" class="even">
+                       <td class="sorting_1">Sport-100 Helmet, Red</td>
+                       <td>Black</td>
+                       <td>41.99</td>
+                       <td>38</td>
+                       <td>China</td>
+                       <td>promo</td>
+                       <td><button data-id="19" class="btn btn-primary btn-sm edit" data-toggle="modal" data-target="#modalEditProduct"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
+                       <td><button data-id="19" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Delete</button></td>
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-sm-5">
+              <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries</div>
+           </div>
+           <div class="col-sm-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                 <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0">Previous</a></li>
+                    <li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li>
+                    <li class="paginate_button next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">Next</a></li>
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
+</div>   
+
+
 
 <br> 
 <h4 id="SQL-Server-version">Version: SQL Server 2019 </h4>
