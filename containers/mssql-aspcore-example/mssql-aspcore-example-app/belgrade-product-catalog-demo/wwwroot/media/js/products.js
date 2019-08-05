@@ -39,7 +39,7 @@ $(document).ready(function () {
         error: function(jqXHR, textStatus, errorThrown) {
             //Catch the error and log to console
             console.log('There was an AjaxError on getting the ServerName and VersionName');
-            $('#SQL-Server-version').append("CTP 2.2");
+            $('#SQL-Server-version').append("CTP 3.2");
             $('#SQL-Server-servername').append("sql-1");
         }}).then(function(data){
         //console.log(data)

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/rhel/server:2019-CTP2.2
+FROM mcr.microsoft.com/mssql/rhel/server:2019-CTP3.1
 
 COPY . /
 

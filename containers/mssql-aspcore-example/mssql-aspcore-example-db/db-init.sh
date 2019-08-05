@@ -2,4 +2,4 @@
 sleep 15s
 
 #run the setup script to create the DB and the schema in the DB
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P safePASSWORD123 -d master -i db-init.sql
+/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Yukon900 -d master -i db-init.sql

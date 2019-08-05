@@ -2,6 +2,8 @@ version: "3"
 services:
     web:
         build: ./mssql-aspcore-example-app
+        environment: 
+            db-hostname: "db"
         ports:
             - "5000:5000"
         depends_on:
@@ -9,7 +11,7 @@ services:
     db:
         build: ./mssql-aspcore-example-db
         environment:
-            SA_PASSWORD: "safePASSWORD123"
+            SA_PASSWORD: "Yukon900"
             ACCEPT_EULA: "Y"
         ports:
             - "1500:1433"
