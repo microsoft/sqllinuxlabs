@@ -187,8 +187,11 @@ Let's learn a few common Linux commands while interacting with the bash shell
 
     Type "q" to exit the tool
 
-10. You will likely need a good editor while using Linux. While the editor vi is installed by default, I recommend you use the **nano** editor. It may be already installed but if not run the following command to install it
+10. You will likely need a good editor while using Linux. While the editor vi is installed by default, I recommend you use the **nano** editor. It may be already installed, run the following command to verify:
+    `rpm -qa | grep nano`
 
+    If not installed, run the following:
+ 
     `sudo yum install -y nano`
 
     Let's use nano to create a shell script to run on Linux
